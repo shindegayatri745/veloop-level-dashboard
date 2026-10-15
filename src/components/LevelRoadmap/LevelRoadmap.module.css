@@ -1,0 +1,83 @@
+.sectionCard {
+  background: rgba(30, 34, 56, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.roadmapContainer {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.75rem;
+  scroll-behavior: smooth;
+}
+
+.tierCard {
+  min-width: 190px;
+  flex: 1;
+  background: rgba(22, 24, 39, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.tierCard:hover {
+  transform: translateY(-2px);
+}
+
+.tierCurrent {
+  border-color: #ffb300;
+  background: rgba(255, 179, 0, 0.05);
+  box-shadow: 0 0 20px rgba(255, 179, 0, 0.15);
+}
+
+.tierCompleted {
+  border-color: rgba(0, 230, 118, 0.4);
+}
+
+.tierLocked {
+  opacity: 0.65;
+}
+
+.tierHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.tierLevelNum {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.tierName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.tierXP {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+}
+
+.perksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
