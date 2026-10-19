@@ -1,42 +1,89 @@
 .card {
-  background: rgba(30, 34, 56, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
   padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-fast);
+}
+
+.card:hover {
+  border-color: var(--border-medium);
 }
 
 .headerRow {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.iconCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: rgba(14, 165, 233, 0.12);
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .cardTitle {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  color: #94a3b8;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--text-primary);
   margin: 0;
+  line-height: 1.2;
+}
+
+.cardSubtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
 }
 
 .xpNumbers {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--text-primary);
+}
+
+.currentXPValue {
+  color: #38bdf8;
 }
 
 .xpMax {
-  color: #64748b;
+  color: var(--text-muted);
+  font-size: 0.85rem;
   font-weight: 600;
-  font-size: 0.95rem;
+}
+
+.pctBadge {
+  font-size: 0.7rem;
+  background: rgba(14, 165, 233, 0.12);
+  color: #38bdf8;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  margin-top: 0.2rem;
+}
+
+/* Track Wrapper */
+.trackWrapper {
+  margin-bottom: 1.25rem;
 }
 
 .progressTrack {
   height: 12px;
   background: rgba(255, 255, 255, 0.06);
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   overflow: hidden;
   position: relative;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -44,25 +91,72 @@
 
 .progressBar {
   height: 100%;
-  background: linear-gradient(90deg, #7c4dff, #00e5ff);
-  border-radius: 9999px;
-  transition: width 0.5s ease-out;
+  background: linear-gradient(90deg, #6366f1 0%, #0ea5e9 50%, #38bdf8 100%);
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  box-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
 }
 
-.footerRow {
+.progressGlow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  filter: blur(4px);
+}
+
+.milestoneMarks {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.85rem;
-  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  padding: 0 0.25rem;
 }
 
-.subText {
-  color: #94a3b8;
+.mark {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
 }
 
-.highlightText {
-  color: #00e5ff;
+.targetMark {
+  color: #38bdf8;
   font-weight: 700;
+}
+
+/* Metrics Grid */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  background: rgba(12, 14, 23, 0.45);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.85rem;
+}
+
+.metricItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.metricLabel {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+  white-space: nowrap;
+}
+
+.metricValue {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+@media (max-width: 576px) {
+  .metricsGrid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
 }

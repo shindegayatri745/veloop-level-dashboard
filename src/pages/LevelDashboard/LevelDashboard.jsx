@@ -1,3 +1,4 @@
+import React from 'react';
 import { CheckCircle, Info } from 'lucide-react';
 import useDashboardData from '../../hooks/useDashboardData';
 import Header from '../../components/Header';
@@ -19,28 +20,39 @@ const LevelDashboard = () => {
     games,
     tasks,
     activities,
+    notifications,
+    markAllNotificationsRead,
+    clearNotifications,
     isLevelUpModalOpen,
     openLevelUpModal,
     closeLevelUpModal,
+    progressTask,
+    claimTaskReward,
     completeTask,
+    awardGameXP,
     playGame,
     toast,
   } = useDashboardData();
 
   return (
     <div className={styles.dashboardWrapper}>
-      {/* Top Navigation Bar */}
-      <Header profile={profile} />
+      {/* Top Sticky Header */}
+      <Header
+        profile={profile}
+        notifications={notifications}
+        onMarkAllRead={markAllNotificationsRead}
+        onClearNotifications={clearNotifications}
+      />
 
       {/* Main Content Area */}
       <main className={styles.mainContent}>
         <div className="container">
-          {/* Hero Section */}
+          {/* Level Hero Section */}
           <section id="dashboard" className="mb-4">
             <LevelHero profile={profile} onOpenModal={openLevelUpModal} />
           </section>
 
-          {/* XP Progress & Next Milestone Reward */}
+          {/* XP Progress & Next Milestone Reward Cards */}
           <section className="row g-4 mb-4">
             <div className="col-12 col-lg-7 d-flex flex-column">
               <XPProgress profile={profile} />
@@ -55,13 +67,22 @@ const LevelDashboard = () => {
             <LevelRoadmap roadmap={roadmap} />
           </section>
 
-          {/* Play & Earn Games + Earn More XP Tasks */}
-          <section id="play" className="row g-4 mb-4">
-            <div className="col-12 col-lg-7">
-              <PlayAndEarn games={games} onPlayGame={playGame} />
+          {/* Play & Earn Games + Daily Quests */}
+          <section className="row g-4 mb-4">
+            <div className="col-12 col-lg-7" id="play">
+              <PlayAndEarn
+                games={games}
+                onPlayGame={playGame}
+                awardGameXP={awardGameXP}
+              />
             </div>
-            <div className="col-12 col-lg-5">
-              <EarnMoreXP tasks={tasks} onCompleteTask={completeTask} />
+            <div className="col-12 col-lg-5" id="quests">
+              <EarnMoreXP
+                tasks={tasks}
+                onCompleteTask={completeTask}
+                onProgressTask={progressTask}
+                onClaimTaskReward={claimTaskReward}
+              />
             </div>
           </section>
 
@@ -70,21 +91,26 @@ const LevelDashboard = () => {
             <XPActivity activities={activities} />
           </section>
 
-          {/* Footer Note */}
+          {/* Clean Ecosystem Footer */}
           <footer className={styles.footerNote}>
-            VELOOP Rewards &bull; Level-Up Dashboard &bull; Internship Project
+            <div className="d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+              <span>VELOOP Rewards &bull; Level-Up Dashboard</span>
+              <span className="text-muted">
+                Demo Engagement &bull; No Real Financial Value
+              </span>
+            </div>
           </footer>
         </div>
       </main>
 
-      {/* Level-Up Modal */}
+      {/* Level-Up Celebration Modal */}
       <LevelUpModal
         isOpen={isLevelUpModalOpen}
         onClose={closeLevelUpModal}
         profile={profile}
       />
 
-      {/* Interactive Toast Notification Feedback */}
+      {/* Reactive Toast Notification Feedback */}
       {toast && (
         <aside
           role="status"
@@ -95,9 +121,9 @@ const LevelDashboard = () => {
         >
           <div className="d-flex align-items-center gap-2">
             {toast.type === 'info' ? (
-              <Info size={18} className="flex-shrink-0" />
+              <Info size={16} className="flex-shrink-0" />
             ) : (
-              <CheckCircle size={18} className="flex-shrink-0" />
+              <CheckCircle size={16} className="flex-shrink-0" />
             )}
             <span>{toast.message}</span>
           </div>

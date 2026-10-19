@@ -2,33 +2,61 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
 :root {
-  --bg-primary: #161827;
-  --bg-secondary: #1e2238;
-  --bg-card: rgba(30, 34, 56, 0.7);
-  --bg-card-hover: rgba(38, 43, 70, 0.85);
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-highlight: rgba(124, 77, 255, 0.3);
+  /* Premium Dark Theme Foundations */
+  --bg-canvas: #0c0e17;
+  --bg-primary: #121524;
+  --bg-secondary: #1a1e33;
+  --bg-card: rgba(23, 27, 46, 0.75);
+  --bg-card-hover: rgba(30, 36, 60, 0.9);
+  --bg-glass: rgba(18, 21, 36, 0.65);
 
-  --accent-purple: #7c4dff;
-  --accent-purple-glow: rgba(124, 77, 255, 0.4);
-  --accent-cyan: #00e5ff;
-  --accent-cyan-glow: rgba(0, 229, 255, 0.3);
-  --accent-amber: #ffb300;
-  --accent-pink: #ff4081;
-  --accent-emerald: #00e676;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-gold: rgba(234, 179, 8, 0.35);
+  --border-cyan: rgba(14, 165, 233, 0.35);
+  --border-indigo: rgba(99, 102, 241, 0.35);
 
+  /* Tier & Accent Colors (Restrained, prestigious palette) */
+  --gold-primary: #eab308;
+  --gold-light: #fef08a;
+  --gold-glow: rgba(234, 179, 8, 0.22);
+
+  --silver-primary: #cbd5e1;
+  --silver-glow: rgba(203, 213, 225, 0.18);
+
+  --cyan-primary: #38bdf8;
+  --cyan-glow: rgba(56, 189, 248, 0.22);
+
+  --indigo-primary: #6366f1;
+  --indigo-glow: rgba(99, 102, 241, 0.25);
+
+  --emerald-primary: #10b981;
+  --emerald-glow: rgba(16, 185, 129, 0.2);
+
+  /* Clean Typography Colors */
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
+  --text-dim: #475569;
 
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --radius-sm: 8px;
-  --radius-md: 12px;
+  
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
   --radius-lg: 18px;
+  --radius-xl: 24px;
   --radius-full: 9999px;
 
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.25s ease;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --shadow-gold: 0 0 24px rgba(234, 179, 8, 0.18);
+  --shadow-indigo: 0 0 24px rgba(99, 102, 241, 0.2);
+
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 * {
@@ -37,11 +65,17 @@
   padding: 0;
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: #161827 !important;
+  background-color: var(--bg-canvas) !important;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.12), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 90% 60%, rgba(14, 165, 233, 0.06), transparent 60%);
   color: var(--text-primary);
   font-family: var(--font-sans);
   min-height: 100vh;
@@ -51,31 +85,59 @@ body {
 
 #root {
   min-height: 100vh;
-  background-color: #161827;
   display: flex;
   flex-direction: column;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #121420;
+  background: rgba(12, 14, 23, 0.8);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2a2f4c;
-  border-radius: 4px;
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3c436b;
+  background: rgba(148, 163, 184, 0.35);
 }
 
-/* Custom button reset for clean component styles */
 button {
   font-family: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Animations */
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.88;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }

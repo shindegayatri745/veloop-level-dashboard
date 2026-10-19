@@ -3,11 +3,38 @@ import { userProfileData, nextLevelRewardData, levelRoadmapData } from '../data/
 import { playAndEarnGames, earnMoreXPTasks } from '../data/earningData';
 import { xpActivityHistory } from '../data/activityData';
 
+const initialNotifications = [
+  {
+    id: 'notif_1',
+    title: 'Tier Milestone Near',
+    message: '1,550 XP needed to unlock Platinum Master tier.',
+    timestamp: '10m ago',
+    unread: true,
+    type: 'progress',
+  },
+  {
+    id: 'notif_2',
+    title: 'Streak Multiplier Active',
+    message: '7-day login streak unlocked a 2.0x boost.',
+    timestamp: '2h ago',
+    unread: true,
+    type: 'streak',
+  },
+  {
+    id: 'notif_3',
+    title: 'Arcade Challenge',
+    message: 'Neon Vault Breach is offering +500 XP today.',
+    timestamp: '1d ago',
+    unread: false,
+    type: 'game',
+  },
+];
+
 /**
  * Custom Hook: useDashboardData
  * Provides reactive state management, interactive XP progression,
- * task completion, game rewards, and modal controls.
- * Pre-configured for seamless REST/GraphQL API integration.
+ * task progression & claim logic, game session rewards, notifications,
+ * and celebratory modals.
  */
 export const useDashboardData = () => {
   const [profile, setProfile] = useState(userProfileData);
@@ -16,6 +43,7 @@ export const useDashboardData = () => {
   const [games, setGames] = useState(playAndEarnGames);
   const [tasks, setTasks] = useState(earnMoreXPTasks);
   const [activities, setActivities] = useState(xpActivityHistory);
+  const [notifications, setNotifications] = useState(initialNotifications);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
   const [toast, setToast] = useState(null);
 
@@ -80,8 +108,62 @@ export const useDashboardData = () => {
     };
 
     setActivities((prev) => [newActivity, ...prev]);
+
+    // Push live notification
+    setNotifications((prev) => [
+      {
+        id: `notif_${Date.now()}`,
+        title: `+${amount} XP Earned`,
+        message: `${sourceTitle} completed successfully`,
+        timestamp: 'Just now',
+        unread: true,
+        type: category === 'Gaming' ? 'game' : 'quest',
+      },
+      ...prev,
+    ]);
   }, [roadmap, showToast]);
 
+  // Advance task step towards completion
+  const progressTask = useCallback((taskId) => {
+    setTasks((prev) =>
+      prev.map((t) => {
+        if (t.id !== taskId || t.isCompleted) return t;
+        const updatedProgress = Math.min(t.progress + 1, t.totalRequired);
+        if (updatedProgress === t.totalRequired) {
+          showToast(`Quest Ready! "${t.title}" can now be claimed.`, 'info');
+        } else {
+          showToast(`Quest Progress: ${updatedProgress}/${t.totalRequired} steps completed`, 'info');
+        }
+        return {
+          ...t,
+          progress: updatedProgress,
+        };
+      })
+    );
+  }, [showToast]);
+
+  // Claim verified completed task
+  const claimTaskReward = useCallback((taskId) => {
+    const task = tasks.find((t) => t.id === taskId);
+    if (!task) return;
+    if (task.isCompleted) {
+      showToast('This reward has already been claimed.', 'info');
+      return;
+    }
+    if (task.progress < task.totalRequired) {
+      showToast(`Quest incomplete (${task.progress}/${task.totalRequired}). Complete all steps first.`, 'info');
+      return;
+    }
+
+    setTasks((prev) =>
+      prev.map((t) => (t.id === taskId ? { ...t, isCompleted: true } : t))
+    );
+
+    addXP(task.rewardXP, `Quest: ${task.title}`, task.category);
+    showToast(`Claimed +${task.rewardXP} XP for "${task.title}"!`, 'success');
+  }, [tasks, addXP, showToast]);
+
+  // Backward-compatible completeTask (advances to full & claims)
   const completeTask = useCallback((taskId) => {
     const task = tasks.find((t) => t.id === taskId);
     if (!task || task.isCompleted) return;
@@ -96,13 +178,31 @@ export const useDashboardData = () => {
     showToast(`Claimed +${task.rewardXP} XP for "${task.title}"!`, 'success');
   }, [tasks, addXP, showToast]);
 
+  // Play game with optional custom score & earned XP
+  const awardGameXP = useCallback((gameId, earnedXP, gameTitle) => {
+    const game = games.find((g) => g.id === gameId);
+    const title = gameTitle || game?.title || 'Game Match';
+    const xp = earnedXP || game?.xpReward || 250;
+
+    addXP(xp, `Victory in ${title}`, 'Gaming');
+    showToast(`Match Finished! +${xp} XP credited to your level 🎮`, 'success');
+  }, [games, addXP, showToast]);
+
+  // Quick play fallback
   const playGame = useCallback((gameId) => {
     const game = games.find((g) => g.id === gameId);
     if (!game) return;
 
-    addXP(game.xpReward, `Match in ${game.title}`, 'Gaming');
-    showToast(`Played ${game.title}! Earned +${game.xpReward} XP 🎮`, 'info');
-  }, [games, addXP, showToast]);
+    awardGameXP(gameId, game.xpReward, game.title);
+  }, [games, awardGameXP]);
+
+  const markAllNotificationsRead = useCallback(() => {
+    setNotifications((prev) => prev.map((n) => ({ ...n, unread: false })));
+  }, []);
+
+  const clearNotifications = useCallback(() => {
+    setNotifications([]);
+  }, []);
 
   const openLevelUpModal = useCallback(() => setIsLevelUpModalOpen(true), []);
   const closeLevelUpModal = useCallback(() => setIsLevelUpModalOpen(false), []);
@@ -120,10 +220,16 @@ export const useDashboardData = () => {
     setTasks,
     activities,
     setActivities,
+    notifications,
+    markAllNotificationsRead,
+    clearNotifications,
     isLevelUpModalOpen,
     openLevelUpModal,
     closeLevelUpModal,
+    progressTask,
+    claimTaskReward,
     completeTask,
+    awardGameXP,
     playGame,
     toast,
   };

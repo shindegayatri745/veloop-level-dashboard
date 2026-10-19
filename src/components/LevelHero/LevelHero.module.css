@@ -1,112 +1,245 @@
 .heroCard {
-  background: linear-gradient(135deg, rgba(30, 34, 56, 0.95), rgba(42, 28, 77, 0.65));
-  border: 1px solid rgba(124, 77, 255, 0.25);
-  border-radius: 20px;
-  padding: 2rem;
+  background: linear-gradient(135deg, rgba(26, 30, 52, 0.85) 0%, rgba(18, 21, 38, 0.95) 100%);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem 2rem;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: var(--shadow-md);
 }
 
-.heroGlow {
+.ambientGlow {
   position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle, rgba(124, 77, 255, 0.35) 0%, rgba(0, 229, 255, 0.05) 70%, transparent 100%);
-  border-radius: 50%;
+  top: -60px;
+  left: 40px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.15) 0%, transparent 70%);
+  filter: blur(35px);
   pointer-events: none;
 }
 
-.levelBadgeContainer {
+/* Emblem with assignment hero.png */
+.emblemWrapper {
   position: relative;
-  display: inline-block;
+  width: 110px;
+  height: 110px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.levelHexagon {
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #ffb300, #ff8f00);
+.pedestalImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.6));
+  animation: floatSubtle 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatSubtle {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-4px);
+  }
+}
+
+.levelBadgeOverlay {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #facc15 0%, #eab308 50%, #ca8a04 100%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(255, 179, 0, 0.35);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 15px rgba(234, 179, 8, 0.5), inset 0 1px 3px rgba(255, 255, 255, 0.6);
+  color: #0f172a;
 }
 
-.levelNumber {
-  font-size: 2rem;
+.badgeLabel {
+  font-size: 0.55rem;
   font-weight: 800;
-  color: #121420;
+  letter-spacing: 0.06em;
   line-height: 1;
 }
 
-.levelLabel {
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: rgba(18, 20, 32, 0.85);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.badgeNumber {
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1;
 }
 
-.title {
-  font-size: 1.85rem;
+.tierRingGlow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.25), transparent 70%);
+  pointer-events: none;
+}
+
+/* Titles and tags */
+.tierTitle {
+  font-size: 1.75rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  margin-bottom: 0.25rem;
-  color: #ffffff;
+  color: var(--text-primary);
+  margin: 0;
 }
 
-.subtitle {
-  color: #94a3b8;
-  font-size: 0.95rem;
-}
-
-.statusPill {
+.tierStatusTag {
+  background: rgba(234, 179, 8, 0.12);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  color: #fde047;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: rgba(0, 229, 255, 0.12);
-  border: 1px solid rgba(0, 229, 255, 0.35);
-  color: #00e5ff;
-  padding: 0.3rem 0.8rem;
-  border-radius: 9999px;
-  font-size: 0.8rem;
+  gap: 0.35rem;
+}
+
+.boostPill {
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  color: #38bdf8;
+  font-size: 0.75rem;
   font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .rankPill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: rgba(255, 179, 0, 0.12);
-  border: 1px solid rgba(255, 179, 0, 0.35);
-  color: #ffb300;
-  padding: 0.3rem 0.8rem;
-  border-radius: 9999px;
-  font-size: 0.8rem;
-  font-weight: 700;
+  gap: 0.35rem;
 }
 
-.actionButton {
-  background: linear-gradient(135deg, #7c4dff, #651fff);
-  color: #ffffff;
-  border: none;
+.tierSubtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.15rem;
+  line-height: 1.45;
+}
+
+.tierSubtitle strong {
+  color: var(--text-primary);
+}
+
+/* Quick Glance Progress */
+.glanceProgress {
+  background: rgba(12, 14, 23, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  max-width: 580px;
+}
+
+.progressLabel {
+  font-size: 0.72rem;
+  text-transform: uppercase;
   font-weight: 700;
-  padding: 0.75rem 1.4rem;
-  border-radius: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.progressRatio {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.progressRatio strong {
+  color: var(--text-primary);
+}
+
+.progressTrack {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin: 0.4rem 0;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #eab308 0%, #38bdf8 100%);
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.countdownText {
+  font-size: 0.72rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.streakIndicator {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+/* CTA button */
+.perksButton {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(99, 102, 241, 0.15));
+  border: 1px solid var(--border-gold);
+  color: #fde047;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(124, 77, 255, 0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  transition: all var(--transition-normal);
+  white-space: nowrap;
 }
 
-.actionButton:hover {
+.perksButton:hover {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.25), rgba(99, 102, 241, 0.25));
+  border-color: #fde047;
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(124, 77, 255, 0.6);
+  box-shadow: 0 6px 20px rgba(234, 179, 8, 0.2);
+}
+
+.btnArrow {
+  transition: transform var(--transition-fast);
+}
+
+.perksButton:hover .btnArrow {
+  transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+  .heroCard {
+    padding: 1.5rem 1.25rem;
+  }
+  .tierTitle {
+    font-size: 1.45rem;
+  }
+  .perksButton {
+    width: 100%;
+    justify-content: center;
+  }
 }
