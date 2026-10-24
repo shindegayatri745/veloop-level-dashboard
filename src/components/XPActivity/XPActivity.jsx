@@ -22,17 +22,17 @@ const XPActivity = ({ activities }) => {
   });
 
   return (
-    <div className={styles.sectionCard} id="activity">
-      {/* Header & Filter Pills */}
+    <div className={styles.activitySection} id="activity">
+      {/* Open Section Header & Filter Pills */}
       <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3 mb-3">
         <div className="d-flex align-items-center gap-2">
           <div className={styles.iconCircle}>
             <History size={16} />
           </div>
           <div>
-            <h2 className={styles.sectionTitle}>XP Activity Log</h2>
-            <span className={styles.sectionSubtitle}>
-              Live ledger of earned XP and milestones
+            <h2 className={styles.headingTitle}>XP Activity Ledger</h2>
+            <span className={styles.headingSubtitle}>
+              Recent rewards and milestone events
             </span>
           </div>
         </div>
@@ -69,13 +69,13 @@ const XPActivity = ({ activities }) => {
                   }`}
                 >
                   {act.category === 'Milestone' ? (
-                    <Award size={16} />
+                    <Award size={15} />
                   ) : act.category === 'Streaks' ? (
-                    <Flame size={16} />
+                    <Flame size={15} />
                   ) : act.category === 'Gaming' ? (
-                    <Gamepad2 size={16} />
+                    <Gamepad2 size={15} />
                   ) : (
-                    <CheckCircle size={16} />
+                    <CheckCircle size={15} />
                   )}
                 </div>
 
@@ -89,7 +89,7 @@ const XPActivity = ({ activities }) => {
               </div>
 
               <div className={styles.xpBadge}>
-                <Sparkles size={12} className="text-success d-none d-sm-inline" />
+                <Sparkles size={11} className="text-success d-none d-sm-inline" />
                 +{act.xpAmount} XP
               </div>
             </div>
@@ -99,7 +99,7 @@ const XPActivity = ({ activities }) => {
             <History size={24} className="text-muted opacity-50 mb-2" />
             <p>No activity logged under &quot;{activeFilter}&quot; yet.</p>
             <a href="#play" className={styles.emptyLink}>
-              Play a game to earn XP &rarr;
+              Play an arcade match to earn XP &rarr;
             </a>
           </div>
         )}

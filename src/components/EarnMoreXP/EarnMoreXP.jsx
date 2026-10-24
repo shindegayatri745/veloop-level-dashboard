@@ -25,17 +25,17 @@ const EarnMoreXP = ({ tasks, onCompleteTask, onProgressTask, onClaimTaskReward }
   };
 
   return (
-    <div className={styles.sectionCard} id="quests">
-      {/* Header */}
+    <div className={styles.questsSection} id="quests">
+      {/* Open Section Header */}
       <div className="d-flex align-items-center justify-content-between mb-3">
         <div className="d-flex align-items-center gap-2">
           <div className={styles.iconCircle}>
             <Target size={16} />
           </div>
           <div>
-            <h2 className={styles.sectionTitle}>Daily & Social Quests</h2>
-            <span className={styles.sectionSubtitle}>
-              Complete objectives to earn bonus XP
+            <h2 className={styles.headingTitle}>Quests & Bounties</h2>
+            <span className={styles.headingSubtitle}>
+              Active objectives for bonus XP
             </span>
           </div>
         </div>
@@ -61,20 +61,17 @@ const EarnMoreXP = ({ tasks, onCompleteTask, onProgressTask, onClaimTaskReward }
                   : ''
               }`}
             >
-              {/* Task Title & Tags */}
+              {/* Task Header: Title, Category & XP Tag */}
               <div className="d-flex align-items-start justify-content-between gap-2 mb-2">
-                <div>
-                  <div className="d-flex align-items-center gap-2 mb-1">
-                    <span className={styles.categoryBadge}>{task.category}</span>
-                    <span className={styles.taskTitle}>{task.title}</span>
-                  </div>
-                  <span className={styles.taskGoalText}>{task.description}</span>
+                <div className="d-flex align-items-center gap-1 gap-sm-2 flex-wrap">
+                  <span className={styles.categoryBadge}>{task.category}</span>
+                  <span className={styles.taskTitle}>{task.title}</span>
                 </div>
                 <span className={styles.xpRewardTag}>+{task.rewardXP} XP</span>
               </div>
 
-              {/* Progress Bar & Actions */}
-              <div className="d-flex align-items-center justify-content-between gap-3 mt-2">
+              {/* Progress & Action Row */}
+              <div className="d-flex align-items-center justify-content-between gap-3">
                 <div className="flex-grow-1">
                   <div className="d-flex justify-content-between fs-7 mb-1">
                     <span className={styles.progressCounter}>
@@ -106,7 +103,7 @@ const EarnMoreXP = ({ tasks, onCompleteTask, onProgressTask, onClaimTaskReward }
                       title={`Claim +${task.rewardXP} XP`}
                     >
                       <Sparkles size={13} />
-                      <span>Claim XP</span>
+                      <span>Claim</span>
                     </button>
                   ) : (
                     <button

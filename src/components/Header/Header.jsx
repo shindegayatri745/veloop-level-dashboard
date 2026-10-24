@@ -56,14 +56,14 @@ const Header = ({
         <div className="container">
           <div className="d-flex align-items-center justify-content-between">
             {/* Brand Logo */}
-            <div className="d-flex align-items-center gap-3">
+            <div className="d-flex align-items-center gap-2 gap-sm-3">
               <a href="#dashboard" className={styles.brand}>
                 <div className={styles.logoIcon}>
-                  <Zap size={20} />
+                  <Zap size={18} />
                 </div>
                 <span>VELOOP</span>
               </a>
-              <span className={styles.badge}>Level-Up Hub</span>
+              <span className={`d-none d-sm-inline-flex ${styles.badge}`}>Rewards</span>
             </div>
 
             {/* Desktop Navigation */}
@@ -186,19 +186,22 @@ const Header = ({
                 aria-label="Open profile modal"
                 title="View user profile & tier benefits"
               >
-                <img
-                  src={
-                    profile?.avatarUrl ||
-                    'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'
-                  }
-                  alt={profile?.username || 'User'}
-                  className={styles.avatar}
-                />
+                <div className={styles.avatarMiniWrapper}>
+                  <img
+                    src={
+                      profile?.avatarUrl ||
+                      'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'
+                    }
+                    alt={profile?.username || 'User'}
+                    className={styles.avatar}
+                  />
+                  <span className={styles.levelTagMini}>{profile?.currentLevel || 4}</span>
+                </div>
                 <div className="d-none d-md-flex flex-column align-items-start text-start">
                   <span className={styles.userName}>{profile?.username || 'Alex_Velooper'}</span>
                   <span className={styles.userTier}>{profile?.currentLevelName || 'Gold Elite'}</span>
                 </div>
-                <span className={styles.levelTag}>L{profile?.currentLevel || 4}</span>
+                <span className={`d-none d-md-inline-block ${styles.levelTag}`}>L{profile?.currentLevel || 4}</span>
               </button>
 
               {/* Mobile Menu Toggle */}
@@ -206,8 +209,9 @@ const Header = ({
                 className={`d-lg-none ${styles.iconButton}`}
                 onClick={() => setIsMobileMenuOpen((prev) => !prev)}
                 aria-label="Toggle navigation menu"
+                aria-expanded={isMobileMenuOpen}
               >
-                <Menu size={18} />
+                {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
               </button>
             </div>
           </div>

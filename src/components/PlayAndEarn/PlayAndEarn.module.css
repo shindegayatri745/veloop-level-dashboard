@@ -1,193 +1,190 @@
-.sectionCard {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  height: 100%;
+.playSection {
+  background: transparent;
 }
 
 .iconCircle {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-sm);
-  background: rgba(234, 179, 8, 0.12);
-  color: #facc15;
+  background: rgba(99, 102, 241, 0.12);
+  color: #a5b4fc;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.sectionTitle {
-  font-size: 0.95rem;
+.headingTitle {
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
   line-height: 1.2;
 }
 
-.sectionSubtitle {
-  font-size: 0.72rem;
+.headingSubtitle {
+  font-size: 0.78rem;
   color: var(--text-muted);
-  font-weight: 600;
 }
 
 .countBadge {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
   padding: 0.2rem 0.55rem;
   border-radius: var(--radius-full);
-  font-weight: 600;
 }
 
 /* Game Card */
 .gameCard {
-  background: rgba(12, 14, 23, 0.65);
+  background: rgba(26, 30, 50, 0.7);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 100%;
   transition: all var(--transition-fast);
+  height: 100%;
 }
 
 .gameCard:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   border-color: var(--border-medium);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .bannerHeader {
-  height: 64px;
+  height: 70px;
   padding: 0.65rem 0.85rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  position: relative;
 }
 
 .bannerEmoji {
-  font-size: 1.6rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  font-size: 1.75rem;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
 }
 
 .hotPill {
-  font-size: 0.65rem;
   background: rgba(249, 115, 22, 0.2);
   border: 1px solid rgba(249, 115, 22, 0.4);
   color: #fb923c;
-  padding: 0.15rem 0.45rem;
-  border-radius: var(--radius-full);
+  font-size: 0.65rem;
   font-weight: 800;
-  display: flex;
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
   align-items: center;
   gap: 0.2rem;
 }
 
 .xpPill {
+  background: rgba(12, 14, 23, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #38bdf8;
   font-size: 0.72rem;
   font-weight: 800;
-  background: rgba(14, 165, 233, 0.2);
-  border: 1px solid rgba(14, 165, 233, 0.4);
-  color: #38bdf8;
   padding: 0.15rem 0.55rem;
   border-radius: var(--radius-full);
 }
 
 .cardBody {
-  padding: 1rem;
+  padding: 0.85rem;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-grow: 1;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
 .gameTitle {
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 0.2rem;
+  margin: 0 0 0.2rem;
+  line-height: 1.2;
 }
 
 .categoryPill {
   font-size: 0.68rem;
   color: var(--text-muted);
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.45rem;
 }
 
 .metaRow {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-size: 0.72rem;
-  color: var(--text-secondary);
+  gap: 0.65rem;
 }
 
 .metaItem {
-  display: flex;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.2rem;
 }
 
 .playBtn {
   width: 100%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-primary);
-  font-size: 0.82rem;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(99, 102, 241, 0.2));
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  font-size: 0.78rem;
   font-weight: 700;
-  padding: 0.5rem 0.85rem;
+  padding: 0.55rem 0.85rem;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .playBtn:hover {
-  background: linear-gradient(135deg, #6366f1, #0ea5e9);
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  color: white;
   border-color: transparent;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
 }
 
-/* Game Modal Arena */
+/* Modal Overlay & Card */
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(8, 10, 18, 0.85);
+  background: rgba(10, 12, 22, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2050;
+  z-index: 2000;
   padding: 1rem;
 }
 
 .gameModal {
-  background: #141829;
+  background: var(--bg-primary);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-xl);
   width: 100%;
-  max-width: 480px;
+  max-width: min(440px, calc(100vw - 24px));
+  max-height: 90vh;
+  overflow-y: auto;
   padding: 2rem 1.75rem;
   position: relative;
   box-shadow: var(--shadow-lg);
-  animation: modalEnter 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  text-align: center;
+  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes modalEnter {
+@keyframes modalPop {
   from {
     opacity: 0;
-    transform: scale(0.92) translateY(12px);
+    transform: scale(0.95) translateY(10px);
   }
   to {
     opacity: 1;
@@ -209,6 +206,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
 .closeBtn:hover {
@@ -220,20 +218,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .briefingIcon {
   font-size: 3rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
 }
 
 .matchTag {
-  font-size: 0.72rem;
-  font-weight: 700;
+  font-size: 0.7rem;
+  font-weight: 800;
   text-transform: uppercase;
   color: #38bdf8;
-  background: rgba(14, 165, 233, 0.12);
-  padding: 0.2rem 0.6rem;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 0.2rem 0.55rem;
   border-radius: var(--radius-full);
   margin-bottom: 0.5rem;
 }
@@ -242,13 +243,12 @@
   font-size: 1.35rem;
   font-weight: 800;
   color: var(--text-primary);
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.35rem;
 }
 
 .modalDesc {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
-  line-height: 1.45;
   margin-bottom: 1.25rem;
 }
 
@@ -261,22 +261,21 @@
 }
 
 .briefingBox {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(22, 24, 39, 0.6);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  padding: 0.6rem 0.4rem;
-  text-align: center;
+  padding: 0.65rem 0.5rem;
 }
 
 .bLabel {
+  display: block;
   font-size: 0.65rem;
   color: var(--text-muted);
-  text-transform: uppercase;
-  font-weight: 700;
-  display: block;
+  margin-bottom: 0.2rem;
 }
 
 .bValue {
+  display: block;
   font-size: 0.82rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -284,81 +283,86 @@
 
 .startMatchBtn {
   width: 100%;
-  background: linear-gradient(135deg, #6366f1, #0ea5e9);
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
   color: white;
+  font-size: 0.9rem;
   font-weight: 700;
-  font-size: 0.95rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1.25rem;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 18px rgba(14, 165, 233, 0.35);
+  transition: all var(--transition-fast);
 }
 
 .startMatchBtn:hover {
-  opacity: 0.94;
+  opacity: 0.92;
+  transform: translateY(-1px);
 }
 
-/* Gameplay state */
+/* Playing State */
 .timerCircle {
-  width: 68px;
-  height: 68px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: rgba(234, 179, 8, 0.15);
-  border: 3px solid #eab308;
+  border: 2px solid #eab308;
+  color: #fde047;
+  font-size: 1.25rem;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
-  font-weight: 900;
-  color: #fde047;
-  margin-bottom: 1rem;
-  box-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
+  margin-bottom: 0.75rem;
+  animation: pulseGlow 1s infinite alternate;
 }
 
 .playingTitle {
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-primary);
-  margin-bottom: 0.35rem;
+  margin: 0 0 0.35rem;
 }
 
 .playingDesc {
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
 }
 
 .actionCoreBtn {
-  width: 200px;
-  height: 120px;
-  background: linear-gradient(135deg, #0ea5e9, #6366f1);
-  border: 3px solid rgba(255, 255, 255, 0.3);
+  width: 100%;
+  background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+  color: #0c0e17;
+  font-size: 0.95rem;
+  font-weight: 900;
+  padding: 1.25rem 1.5rem;
   border-radius: var(--radius-lg);
-  color: white;
-  font-weight: 800;
-  font-size: 0.85rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   cursor: pointer;
-  box-shadow: 0 0 30px rgba(14, 165, 233, 0.4);
-  transition: transform 0.1s ease;
+  box-shadow: 0 6px 24px rgba(234, 179, 8, 0.4);
+  transition: transform 0.08s ease;
   user-select: none;
 }
 
 .actionCoreBtn:active {
-  transform: scale(0.94);
+  transform: scale(0.96);
+}
+
+.pulseIcon {
+  animation: pulseGlow 0.5s infinite alternate;
 }
 
 .liveScore {
-  margin-top: 1.25rem;
-  font-size: 0.88rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
 }
 
@@ -368,50 +372,53 @@
 
 /* Result State */
 .victoryIcon {
-  width: 72px;
-  height: 72px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #eab308, #ca8a04);
-  color: #0c0e17;
+  background: rgba(16, 185, 129, 0.15);
+  border: 2px solid #10b981;
+  color: #34d399;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0.75rem;
-  box-shadow: 0 0 30px rgba(234, 179, 8, 0.45);
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.35);
 }
 
 .victoryTag {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 800;
   text-transform: uppercase;
   color: #34d399;
   background: rgba(16, 185, 129, 0.12);
-  padding: 0.2rem 0.6rem;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.2rem 0.55rem;
   border-radius: var(--radius-full);
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
 }
 
 .resultTitle {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 800;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
 }
 
 .rewardBox {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-gold);
+  width: 100%;
+  background: rgba(22, 24, 39, 0.8);
+  border: 1px solid rgba(56, 189, 248, 0.3);
   border-radius: var(--radius-md);
   padding: 1rem;
-  width: 100%;
+  margin-bottom: 0.75rem;
 }
 
 .rewardAmount {
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   font-weight: 900;
   color: #38bdf8;
   line-height: 1.1;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.25rem;
 }
 
 .rewardNote {
@@ -422,7 +429,7 @@
 .replayBtn {
   flex: 1;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-medium);
   color: var(--text-primary);
   font-size: 0.82rem;
   font-weight: 700;
@@ -433,10 +440,11 @@
   justify-content: center;
   gap: 0.4rem;
   cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
 .replayBtn:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .returnBtn {
@@ -453,8 +461,19 @@
   gap: 0.4rem;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+  transition: all var(--transition-fast);
 }
 
 .returnBtn:hover {
-  opacity: 0.94;
+  opacity: 0.92;
+}
+
+@media (max-width: 576px) {
+  .gameModal {
+    padding: 1.5rem 1.15rem;
+  }
+  .briefingPills {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
 }

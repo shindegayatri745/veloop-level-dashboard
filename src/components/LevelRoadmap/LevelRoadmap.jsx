@@ -1,25 +1,30 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   Map,
   CheckCircle2,
   Lock,
-  Flame,
-  ChevronLeft,
+  Award,
   ChevronRight,
-  Award
+  Sparkles,
+  Crown,
+  Gem,
+  Star,
+  Shield
 } from 'lucide-react';
 import styles from './LevelRoadmap.module.css';
 
+const tierIcons = {
+  1: Star,
+  2: Shield,
+  3: Sparkles,
+  4: Crown,
+  5: Award,
+  6: Gem,
+};
+
 const LevelRoadmap = ({ roadmap }) => {
   const [filter, setFilter] = useState('all'); // 'all' | 'completed' | 'current' | 'locked'
-  const scrollRef = useRef(null);
-
-  const scroll = (direction) => {
-    if (scrollRef.current) {
-      const scrollAmount = direction === 'left' ? -240 : 240;
-      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-  };
+  const [selectedTier, setSelectedTier] = useState(roadmap?.find((t) => t.status === 'current') || roadmap?.[3]);
 
   const filteredRoadmap = roadmap?.filter((tier) => {
     if (filter === 'all') return true;
@@ -27,138 +32,185 @@ const LevelRoadmap = ({ roadmap }) => {
   });
 
   return (
-    <div className={styles.sectionCard}>
-      {/* Header & Controls */}
+    <div className={styles.roadmapSection} id="roadmap">
+      {/* Section Header */}
       <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3 mb-3">
         <div className="d-flex align-items-center gap-2">
           <div className={styles.iconCircle}>
             <Map size={16} />
           </div>
           <div>
-            <h2 className={styles.sectionTitle}>Tier Progression Roadmap</h2>
-            <span className={styles.sectionSubtitle}>
-              Milestones from Level 1 Pioneer to Level 6 Champion
+            <h2 className={styles.headingTitle}>Level Progression Roadmap</h2>
+            <span className={styles.headingSubtitle}>
+              Progress from Level 1 Pioneer to Level 6 Diamond Champion
             </span>
           </div>
         </div>
 
-        {/* Filter Pills & Scroll Arrows */}
-        <div className="d-flex align-items-center gap-2 w-100 w-md-auto justify-content-between justify-content-md-end">
-          <div className={styles.filterPills}>
-            <button
-              className={`${styles.filterBtn} ${filter === 'all' ? styles.filterBtnActive : ''}`}
-              onClick={() => setFilter('all')}
-            >
-              All (6)
-            </button>
-            <button
-              className={`${styles.filterBtn} ${filter === 'completed' ? styles.filterBtnActive : ''}`}
-              onClick={() => setFilter('completed')}
-            >
-              Completed
-            </button>
-            <button
-              className={`${styles.filterBtn} ${filter === 'current' ? styles.filterBtnActive : ''}`}
-              onClick={() => setFilter('current')}
-            >
-              Active
-            </button>
-            <button
-              className={`${styles.filterBtn} ${filter === 'locked' ? styles.filterBtnActive : ''}`}
-              onClick={() => setFilter('locked')}
-            >
-              Locked
-            </button>
-          </div>
-
-          <div className="d-none d-md-flex align-items-center gap-1">
-            <button
-              className={styles.scrollBtn}
-              onClick={() => scroll('left')}
-              aria-label="Scroll roadmap left"
-              title="Scroll left"
-            >
-              <ChevronLeft size={16} />
-            </button>
-            <button
-              className={styles.scrollBtn}
-              onClick={() => scroll('right')}
-              aria-label="Scroll roadmap right"
-              title="Scroll right"
-            >
-              <ChevronRight size={16} />
-            </button>
-          </div>
+        {/* Filter Pills */}
+        <div className={styles.filterPills}>
+          <button
+            className={`${styles.filterBtn} ${filter === 'all' ? styles.filterBtnActive : ''}`}
+            onClick={() => setFilter('all')}
+          >
+            All (6)
+          </button>
+          <button
+            className={`${styles.filterBtn} ${filter === 'completed' ? styles.filterBtnActive : ''}`}
+            onClick={() => setFilter('completed')}
+          >
+            Completed
+          </button>
+          <button
+            className={`${styles.filterBtn} ${filter === 'current' ? styles.filterBtnActive : ''}`}
+            onClick={() => setFilter('current')}
+          >
+            Active (L4)
+          </button>
+          <button
+            className={`${styles.filterBtn} ${filter === 'locked' ? styles.filterBtnActive : ''}`}
+            onClick={() => setFilter('locked')}
+          >
+            Upcoming
+          </button>
         </div>
       </div>
 
-      {/* Roadmap Cards Track */}
-      <div className={styles.roadmapScrollArea} ref={scrollRef}>
-        <div className={styles.roadmapGrid}>
+      {/* Connected Progression Journey Track */}
+      <div className={styles.trackContainer}>
+        {/* Desktop Continuous Connecting Line */}
+        <div className={styles.connectingLineDesktop}>
+          <div className={styles.completedLineProgress} />
+        </div>
+
+        {/* Vertical Connecting Line for Mobile */}
+        <div className={styles.connectingLineMobile} />
+
+        <div className={styles.nodesWrapper}>
           {filteredRoadmap?.map((tier) => {
             const isCompleted = tier.status === 'completed';
             const isCurrent = tier.status === 'current';
-            const isLocked = tier.status === 'locked';
+            const isSelected = selectedTier?.level === tier.level;
+            const TierIconComponent = tierIcons[tier.level] || Award;
 
             return (
               <div
                 key={tier.level}
-                className={`${styles.tierCard} ${
+                className={`${styles.roadmapNodeCard} ${
                   isCurrent
-                    ? styles.tierCurrent
+                    ? styles.nodeCurrent
                     : isCompleted
-                    ? styles.tierCompleted
-                    : styles.tierLocked
+                    ? styles.nodeCompleted
+                    : styles.nodeLocked
+                } ${isSelected ? styles.nodeSelected : ''} ${
+                  tier.level === 1
+                    ? styles.tierBronze
+                    : tier.level <= 3
+                    ? styles.tierSilver
+                    : tier.level === 4
+                    ? styles.tierGold
+                    : tier.level === 5
+                    ? styles.tierPlatinum
+                    : styles.tierDiamond
                 }`}
+                onClick={() => setSelectedTier(tier)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setSelectedTier(tier);
+                  }
+                }}
+                aria-label={`View details for Level ${tier.level} ${tier.name}`}
               >
-                {/* Status Header */}
-                <div className={styles.tierHeader}>
-                  <span className={styles.levelTag}>LVL {tier.level}</span>
-                  {isCompleted && (
-                    <span className={styles.statusBadgeCompleted}>
-                      <CheckCircle2 size={12} /> Unlocked
-                    </span>
-                  )}
-                  {isCurrent && (
-                    <span className={styles.statusBadgeCurrent}>
-                      <Flame size={12} /> Active Tier
-                    </span>
-                  )}
-                  {isLocked && (
-                    <span className={styles.statusBadgeLocked}>
-                      <Lock size={12} /> Locked
-                    </span>
-                  )}
-                </div>
-
-                {/* Tier Name & XP Milestone */}
-                <div className={styles.tierName}>{tier.name}</div>
-                <div className={styles.tierXP}>
-                  {tier.minXP.toLocaleString()} - {tier.maxXP.toLocaleString()} XP
-                </div>
-
-                {/* Badge Reward Pill */}
-                {tier.rewardBadge && (
-                  <div className={styles.badgePill}>
-                    <Award size={12} className="flex-shrink-0" />
-                    <span>{tier.rewardBadge}</span>
+                {/* Node Level Bubble & Connector Node */}
+                <div className={styles.nodeBubbleWrapper}>
+                  <div className={styles.nodeBubble}>
+                    {isCompleted ? (
+                      <CheckCircle2 size={16} className={styles.completedCheck} />
+                    ) : isCurrent ? (
+                      <Crown size={18} className={styles.currentCrown} />
+                    ) : (
+                      <Lock size={14} className={styles.lockedLock} />
+                    )}
                   </div>
-                )}
+                  <span className={styles.levelIndicator}>LVL {tier.level}</span>
+                </div>
 
-                {/* Perks Preview */}
-                <ul className={styles.perksList}>
-                  {tier.perks.map((perk, idx) => (
-                    <li key={idx}>
-                      <span className={styles.bullet}>•</span>
-                      <span>{perk}</span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Level Details */}
+                <div className={styles.nodeContent}>
+                  <div className="d-flex align-items-center justify-content-between gap-1 mb-1">
+                    <span className={styles.tierName}>{tier.name}</span>
+                    {isCurrent && <span className={styles.currentBadge}>Current</span>}
+                  </div>
+
+                  <span className={styles.xpRange}>
+                    {tier.minXP.toLocaleString()} – {tier.maxXP.toLocaleString()} XP
+                  </span>
+
+                  {tier.rewardBadge && (
+                    <div className={styles.rewardBadgeChip}>
+                      <TierIconComponent size={11} className="flex-shrink-0" />
+                      <span>{tier.rewardBadge}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             );
           })}
         </div>
       </div>
+
+      {/* Selected Tier Spotlight Drawer (Eliminates redundant text across all cards) */}
+      {selectedTier && (
+        <div className={styles.tierSpotlight}>
+          <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2 mb-2 pb-2 border-bottom border-secondary border-opacity-25">
+            <div className="d-flex align-items-center gap-2">
+              <span className={styles.spotlightLevelTag}>Level {selectedTier.level}</span>
+              <h3 className={styles.spotlightTitle}>{selectedTier.name}</h3>
+              <span
+                className={`${styles.spotlightStatusTag} ${
+                  selectedTier.status === 'current'
+                    ? styles.statusCurrentTag
+                    : selectedTier.status === 'completed'
+                    ? styles.statusCompletedTag
+                    : styles.statusLockedTag
+                }`}
+              >
+                {selectedTier.status === 'current'
+                  ? 'Current Active Tier'
+                  : selectedTier.status === 'completed'
+                  ? 'Tier Achieved'
+                  : 'Locked Milestone'}
+              </span>
+            </div>
+
+            <span className={styles.spotlightXP}>
+              Milestone Requirement: <strong>{selectedTier.minXP.toLocaleString()} – {selectedTier.maxXP.toLocaleString()} XP</strong>
+            </span>
+          </div>
+
+          {/* Perks Row with Visual Badges */}
+          <div className="row g-2 align-items-center">
+            <div className="col-12 col-md-auto">
+              <span className={styles.perksTitle}>
+                <Sparkles size={13} className="text-warning d-inline me-1" />
+                Unlocked Perks:
+              </span>
+            </div>
+            <div className="col-12 col-md">
+              <div className="d-flex flex-wrap gap-2">
+                {selectedTier.perks.map((perk, idx) => (
+                  <span key={idx} className={styles.perkBadge}>
+                    <ChevronRight size={12} className="text-info" />
+                    {perk}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

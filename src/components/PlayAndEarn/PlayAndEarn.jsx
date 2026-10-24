@@ -3,7 +3,6 @@ import {
   Gamepad2,
   Star,
   Clock,
-  Users,
   Play,
   RotateCcw,
   Sparkles,
@@ -15,7 +14,7 @@ import {
 } from 'lucide-react';
 import styles from './PlayAndEarn.module.css';
 
-// Aesthetic game theme color mapping
+// Aesthetic theme gradient mapping
 const gameThemes = {
   game_01: {
     gradient: 'linear-gradient(135deg, #0284c7 0%, #1e1b4b 100%)',
@@ -102,21 +101,21 @@ const PlayAndEarn = ({ games, onPlayGame, awardGameXP }) => {
   };
 
   return (
-    <div className={styles.sectionCard}>
-      {/* Section Header */}
+    <div className={styles.playSection} id="play">
+      {/* Open Section Header */}
       <div className="d-flex align-items-center justify-content-between mb-3">
         <div className="d-flex align-items-center gap-2">
           <div className={styles.iconCircle}>
             <Gamepad2 size={16} />
           </div>
           <div>
-            <h2 className={styles.sectionTitle}>Play & Earn XP</h2>
-            <span className={styles.sectionSubtitle}>
-              Interactive arcade titles with active 2.0x boost
+            <h2 className={styles.headingTitle}>Play & Earn</h2>
+            <span className={styles.headingSubtitle}>
+              Arcade titles with 2.0x Boost Multiplier
             </span>
           </div>
         </div>
-        <span className={styles.countBadge}>{games?.length || 4} Featured</span>
+        <span className={styles.countBadge}>{games?.length || 4} Available</span>
       </div>
 
       {/* Games 2x2 Grid */}
@@ -125,14 +124,14 @@ const PlayAndEarn = ({ games, onPlayGame, awardGameXP }) => {
           const theme = gameThemes[game.id] || gameThemes.game_01;
 
           return (
-            <div key={game.id} className="col-12 col-sm-6">
+            <div key={game.id} className="col-12 col-md-6">
               <div className={styles.gameCard}>
                 {/* Visual Header Banner */}
                 <div
                   className={styles.bannerHeader}
                   style={{ background: theme.gradient }}
                 >
-                  <div className={styles.bannerEmoji}>{theme.icon}</div>
+                  <span className={styles.bannerEmoji}>{theme.icon}</span>
                   <div className="d-flex align-items-center gap-1">
                     {game.isHot && (
                       <span className={styles.hotPill}>
@@ -151,13 +150,10 @@ const PlayAndEarn = ({ games, onPlayGame, awardGameXP }) => {
 
                     <div className={styles.metaRow}>
                       <span className={styles.metaItem}>
-                        <Clock size={12} /> {game.playTime}
-                      </span>
-                      <span className={styles.metaItem}>
-                        <Users size={12} /> {game.activePlayers}
+                        <Clock size={11} /> {game.playTime}
                       </span>
                       <span className={`${styles.metaItem} text-warning`}>
-                        <Star size={12} fill="#eab308" /> {game.rating}
+                        <Star size={11} fill="#eab308" /> {game.rating}
                       </span>
                     </div>
                   </div>
@@ -168,7 +164,7 @@ const PlayAndEarn = ({ games, onPlayGame, awardGameXP }) => {
                     aria-label={`Play ${game.title}`}
                   >
                     <Play size={14} fill="currentColor" />
-                    <span>Play Match</span>
+                    <span>Play Now</span>
                   </button>
                 </div>
               </div>
@@ -177,7 +173,7 @@ const PlayAndEarn = ({ games, onPlayGame, awardGameXP }) => {
         })}
       </div>
 
-      {/* Interactive Game Arena Modal (State Machine) */}
+      {/* Interactive Game Arena Modal */}
       {gameState !== 'idle' && activeGame && (
         <div className={styles.modalOverlay} onClick={handleCloseModal}>
           <div className={styles.gameModal} onClick={(e) => e.stopPropagation()}>
@@ -195,15 +191,15 @@ const PlayAndEarn = ({ games, onPlayGame, awardGameXP }) => {
                 <div className={styles.briefingIcon}>
                   {gameThemes[activeGame.id]?.icon || '🎮'}
                 </div>
-                <span className={styles.matchTag}>Arcade Match Challenge</span>
+                <span className={styles.matchTag}>Arcade Challenge</span>
                 <h3 className={styles.modalGameTitle}>{activeGame.title}</h3>
                 <p className={styles.modalDesc}>
-                  Play a rapid matchmaking session to earn XP toward your <strong>Level 5 Milestone</strong>.
+                  Rapid matchmaking round. Earn XP toward your <strong>Level 5 Milestone</strong>.
                 </p>
 
                 <div className={styles.briefingPills}>
                   <div className={styles.briefingBox}>
-                    <span className={styles.bLabel}>Potential Bounty</span>
+                    <span className={styles.bLabel}>Bounty</span>
                     <span className={`${styles.bValue} text-info`}>+{activeGame.xpReward} XP</span>
                   </div>
                   <div className={styles.briefingBox}>
@@ -211,14 +207,14 @@ const PlayAndEarn = ({ games, onPlayGame, awardGameXP }) => {
                     <span className={styles.bValue}>{activeGame.difficulty}</span>
                   </div>
                   <div className={styles.briefingBox}>
-                    <span className={styles.bLabel}>Boost Applied</span>
-                    <span className={`${styles.bValue} text-warning`}>2.0x Multiplier</span>
+                    <span className={styles.bLabel}>Boost</span>
+                    <span className={`${styles.bValue} text-warning`}>2.0x Active</span>
                   </div>
                 </div>
 
                 <button className={styles.startMatchBtn} onClick={handleStartPlay}>
                   <Play size={16} fill="currentColor" />
-                  <span>Start Match Now</span>
+                  <span>Start Match</span>
                 </button>
               </div>
             )}
@@ -229,11 +225,11 @@ const PlayAndEarn = ({ games, onPlayGame, awardGameXP }) => {
                 <div className={styles.timerCircle}>
                   <span>{timer}s</span>
                 </div>
-                <h3 className={styles.playingTitle}>Click / Tap Reflex Target!</h3>
-                <p className={styles.playingDesc}>Tap rapidly to charge your velocity multiplier.</p>
+                <h3 className={styles.playingTitle}>Tap Velocity Core!</h3>
+                <p className={styles.playingDesc}>Tap rapidly before time expires to maximize bonus points.</p>
 
                 <button className={styles.actionCoreBtn} onClick={handleGameAction}>
-                  <Zap size={28} className={styles.pulseIcon} />
+                  <Zap size={26} className={styles.pulseIcon} />
                   <span>CHARGE CORE (+150 pts)</span>
                 </button>
 
@@ -257,8 +253,8 @@ const PlayAndEarn = ({ games, onPlayGame, awardGameXP }) => {
                     +{activeGame.xpReward} XP
                   </div>
                   <div className={styles.rewardNote}>
-                    <Sparkles size={14} className="d-inline text-warning me-1" />
-                    Credited directly to Level 4 Progress & History Log
+                    <Sparkles size={13} className="d-inline text-warning me-1" />
+                    Credited to Level 4 Progress
                   </div>
                 </div>
 
@@ -269,7 +265,7 @@ const PlayAndEarn = ({ games, onPlayGame, awardGameXP }) => {
                   </button>
                   <button className={styles.returnBtn} onClick={handleCloseModal}>
                     <CheckCircle2 size={15} />
-                    <span>Collect & Return</span>
+                    <span>Collect XP</span>
                   </button>
                 </div>
               </div>

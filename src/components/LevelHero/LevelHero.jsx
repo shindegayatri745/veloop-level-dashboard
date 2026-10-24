@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Trophy, ShieldCheck, Zap, ArrowRight, Flame } from 'lucide-react';
+import { Sparkles, Trophy, Zap, ArrowRight, Flame, Gamepad2, Crown } from 'lucide-react';
 import heroBadge from '../../assets/hero.png';
 import styles from './LevelHero.module.css';
 
@@ -10,20 +10,21 @@ const LevelHero = ({ profile, onOpenModal }) => {
   const xpNeeded = Math.max(maxXP - currentXP, 0);
 
   return (
-    <div className={styles.heroCard}>
-      {/* Background Ambience */}
+    <div className={styles.heroSection}>
+      {/* Ambient Lighting Glow */}
       <div className={styles.ambientGlow} />
 
-      <div className="row align-items-center g-4 position-relative">
-        {/* Tier Emblem Badge with Assignment Asset */}
+      <div className="row align-items-center g-3 g-md-4 position-relative">
+        {/* Visual Focal Point: Level Badge Emblem */}
         <div className="col-12 col-md-auto text-center text-md-start">
           <div className={styles.emblemWrapper}>
             <img
               src={heroBadge}
-              alt="Level Badge Pedestal"
+              alt={`Level ${profile?.currentLevel || 4} Badge Pedestal`}
               className={styles.pedestalImg}
             />
             <div className={styles.levelBadgeOverlay}>
+              <Crown size={12} className={styles.crownIcon} />
               <span className={styles.badgeLabel}>LVL</span>
               <span className={styles.badgeNumber}>{profile?.currentLevel || 4}</span>
             </div>
@@ -31,67 +32,78 @@ const LevelHero = ({ profile, onOpenModal }) => {
           </div>
         </div>
 
-        {/* Hero Title & Tier Highlights */}
+        {/* Level Info & Glancable Progress */}
         <div className="col-12 col-md text-center text-md-start">
+          {/* Header Row: Title & Key Badges */}
           <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
-            <h1 className={styles.tierTitle}>{profile?.currentLevelName || 'Gold Elite'}</h1>
-            <span className={styles.tierStatusTag}>
-              <ShieldCheck size={14} />
-              <span>{profile?.badge || 'Elite Tier'}</span>
-            </span>
-            <span className={styles.boostPill}>
+            <h1 className={styles.tierTitle}>
+              Level {profile?.currentLevel || 4}: {profile?.currentLevelName || 'Gold Elite'}
+            </h1>
+            <span className={styles.boostPill} title="Active earning boost multiplier">
               <Zap size={13} />
-              <span>2.0x XP Boost</span>
+              <span>2.0x Boost</span>
             </span>
             {profile?.rank && (
-              <span className={styles.rankPill}>
+              <span className={styles.rankPill} title="Current global rank">
                 <Trophy size={13} className="text-warning" />
                 <span>{profile.rank}</span>
               </span>
             )}
+            {profile?.streakDays && (
+              <span className={styles.streakPill} title="Daily login streak">
+                <Flame size={13} className="text-warning" />
+                <span>{profile.streakDays}d Streak</span>
+              </span>
+            )}
           </div>
 
-          <p className={styles.tierSubtitle}>
-            Earning at double rate. Advance to <strong>Level {profile?.nextLevel || 5} ({profile?.nextLevelName || 'Platinum Master'})</strong> to unlock VIP rewards.
-          </p>
-
-          {/* Quick Glancable Progress Bar */}
-          <div className={styles.glanceProgress}>
+          {/* Prominent XP Progression Bar */}
+          <div className={styles.progressContainer}>
             <div className="d-flex justify-content-between align-items-center mb-1">
-              <span className={styles.progressLabel}>Tier 4 Progression</span>
+              <span className={styles.progressLabel}>Tier Progress</span>
               <span className={styles.progressRatio}>
-                <strong>{currentXP.toLocaleString()}</strong> / {maxXP.toLocaleString()} XP ({progressPercent}%)
+                <strong>{currentXP.toLocaleString()}</strong> / {maxXP.toLocaleString()} XP
+                <span className={styles.progressPctBadge}>{progressPercent}%</span>
               </span>
             </div>
-            <div className={styles.progressTrack}>
+
+            <div className={styles.progressTrack} role="progressbar" aria-valuenow={progressPercent} aria-valuemin="0" aria-valuemax="100">
               <div
                 className={styles.progressBar}
                 style={{ width: `${progressPercent}%` }}
-              />
+              >
+                <div className={styles.shimmerTip} />
+              </div>
             </div>
+
             <div className="d-flex justify-content-between align-items-center mt-1">
-              <span className={styles.countdownText}>
-                {xpNeeded.toLocaleString()} XP needed for Next Tier
+              <span className={styles.nextMilestoneText}>
+                <strong>{xpNeeded.toLocaleString()} XP</strong> to Level {profile?.nextLevel || 5} ({profile?.nextLevelName || 'Platinum Master'})
               </span>
-              <span className={styles.streakIndicator}>
-                <Flame size={13} className="text-warning d-inline me-1" />
-                {profile?.streakDays || 7}-Day Active Streak
-              </span>
+              <span className={styles.paceText}>Active Tier 4</span>
             </div>
           </div>
         </div>
 
-        {/* Action Button */}
-        <div className="col-12 col-md-auto text-center text-md-end">
+        {/* Action Buttons */}
+        <div className="col-12 col-md-auto d-flex flex-row flex-md-column gap-2 justify-content-center">
           <button
-            className={styles.perksButton}
+            className={styles.primaryBtn}
             onClick={onOpenModal}
-            aria-label="View unlocked tier perks"
+            aria-label="View current tier perks and benefits"
           >
-            <Sparkles size={16} />
+            <Sparkles size={15} />
             <span>Tier Perks</span>
-            <ArrowRight size={14} className={styles.btnArrow} />
+            <ArrowRight size={13} className={styles.btnArrow} />
           </button>
+          <a
+            href="#play"
+            className={styles.secondaryBtn}
+            aria-label="Jump to Play & Earn games"
+          >
+            <Gamepad2 size={15} />
+            <span>Earn XP</span>
+          </a>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, TrendingUp, Flag } from 'lucide-react';
+import { Target, TrendingUp, Flag, CheckCircle2 } from 'lucide-react';
 import styles from './XPProgress.module.css';
 
 const XPProgress = ({ profile }) => {
@@ -8,72 +8,87 @@ const XPProgress = ({ profile }) => {
   const progressPercent = Math.min(Math.round((currentXP / maxXP) * 100), 100);
   const remainingXP = Math.max(maxXP - currentXP, 0);
 
+  const checkpoints = [
+    { label: 'Start', pct: 0, xp: 0, reached: true },
+    { label: 'Quarter', pct: 25, xp: Math.round(maxXP * 0.25), reached: currentXP >= maxXP * 0.25 },
+    { label: 'Midpoint', pct: 50, xp: Math.round(maxXP * 0.5), reached: currentXP >= maxXP * 0.5 },
+    { label: 'Crucial', pct: 75, xp: Math.round(maxXP * 0.75), reached: currentXP >= maxXP * 0.75 },
+    { label: 'Unlock', pct: 100, xp: maxXP, reached: currentXP >= maxXP },
+  ];
+
   return (
-    <div className={styles.card}>
-      <div className={styles.headerRow}>
+    <div className={styles.progressSection}>
+      {/* Open Section Header */}
+      <div className="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between gap-1 mb-3">
         <div className="d-flex align-items-center gap-2">
           <div className={styles.iconCircle}>
             <Target size={16} />
           </div>
           <div>
-            <h2 className={styles.cardTitle}>Tier XP Progression</h2>
-            <span className={styles.cardSubtitle}>
-              Level {profile?.currentLevel || 4} &rarr; Level {profile?.nextLevel || 5}
+            <h2 className={styles.headingTitle}>Milestone Checkpoints</h2>
+            <span className={styles.headingSubtitle}>
+              Level {profile?.currentLevel || 4} to Level {profile?.nextLevel || 5} Path
             </span>
           </div>
         </div>
 
-        <div className="text-end">
-          <div className={styles.xpNumbers}>
-            <span className={styles.currentXPValue}>{currentXP.toLocaleString()}</span>
-            <span className={styles.xpMax}> / {maxXP.toLocaleString()} XP</span>
-          </div>
-          <span className={styles.pctBadge}>{progressPercent}% Reached</span>
+        <div className="mt-1 mt-sm-0">
+          <span className={styles.currentXPText}>
+            <strong>{currentXP.toLocaleString()}</strong> / {maxXP.toLocaleString()} XP
+          </span>
         </div>
       </div>
 
-      {/* Interactive Progress Track with Milestone Ticks */}
-      <div className={styles.trackWrapper}>
-        <div className={styles.progressTrack}>
+      {/* Visual Step Stepper */}
+      <div className={styles.stepperContainer}>
+        {/* Continuous Track */}
+        <div className={styles.stepperTrack}>
           <div
-            className={styles.progressBar}
+            className={styles.stepperFill}
             style={{ width: `${progressPercent}%` }}
-          >
-            <div className={styles.progressGlow} />
-          </div>
+          />
         </div>
 
-        {/* Milestone Notches */}
-        <div className={styles.milestoneMarks}>
-          <span className={styles.mark}>0%</span>
-          <span className={styles.mark}>25%</span>
-          <span className={styles.mark}>50%</span>
-          <span className={styles.mark}>75%</span>
-          <span className={`${styles.mark} ${styles.targetMark}`}>
-            <Flag size={10} className="d-inline me-1" />
-            100%
-          </span>
+        {/* Milestone Checkpoint Nodes */}
+        <div className={styles.nodesRow}>
+          {checkpoints.map((cp) => (
+            <div key={cp.pct} className={styles.checkpointNode}>
+              <div
+                className={`${styles.nodeDot} ${
+                  cp.reached ? styles.nodeReached : styles.nodeUpcoming
+                }`}
+              >
+                {cp.reached ? (
+                  <CheckCircle2 size={12} className={styles.reachedIcon} />
+                ) : (
+                  <Flag size={10} className={styles.upcomingIcon} />
+                )}
+              </div>
+              <span className={styles.nodeLabel}>{cp.pct}%</span>
+              <span className={styles.nodeXP}>{cp.xp.toLocaleString()} XP</span>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Metrics Row */}
-      <div className={styles.metricsGrid}>
-        <div className={styles.metricItem}>
-          <span className={styles.metricLabel}>Earned this Tier</span>
-          <span className={styles.metricValue}>+{currentXP.toLocaleString()} XP</span>
+      {/* Concise Visual Indicators - Unboxed Layout */}
+      <div className={styles.summaryStrip}>
+        <div className={styles.summaryItem}>
+          <span className={styles.summaryDot} style={{ background: '#eab308' }} />
+          <span className={styles.summaryLabel}>Tier Progress:</span>
+          <span className={styles.summaryVal}>+{currentXP.toLocaleString()} XP</span>
         </div>
-        <div className={styles.metricItem}>
-          <span className={styles.metricLabel}>Required for Level {profile?.nextLevel || 5}</span>
-          <span className={`${styles.metricValue} text-info`}>
-            {remainingXP.toLocaleString()} XP
-          </span>
+        <div className={styles.summaryDivider} />
+        <div className={styles.summaryItem}>
+          <span className={styles.summaryDot} style={{ background: '#38bdf8' }} />
+          <span className={styles.summaryLabel}>Remaining:</span>
+          <span className={styles.summaryVal}>{remainingXP.toLocaleString()} XP</span>
         </div>
-        <div className={styles.metricItem}>
-          <span className={styles.metricLabel}>Pace Velocity</span>
-          <span className={`${styles.metricValue} text-success d-flex align-items-center gap-1`}>
-            <TrendingUp size={13} />
-            On Track
-          </span>
+        <div className={styles.summaryDivider} />
+        <div className={styles.summaryItem}>
+          <TrendingUp size={13} className="text-success" />
+          <span className={styles.summaryLabel}>Pace:</span>
+          <span className={`${styles.summaryVal} text-success`}>On Track</span>
         </div>
       </div>
     </div>

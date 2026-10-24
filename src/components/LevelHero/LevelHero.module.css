@@ -1,29 +1,28 @@
-.heroCard {
-  background: linear-gradient(135deg, rgba(26, 30, 52, 0.85) 0%, rgba(18, 21, 38, 0.95) 100%);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-xl);
-  padding: 1.75rem 2rem;
+.heroSection {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0.5rem 0 0.75rem;
   position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
+  overflow: visible;
 }
 
 .ambientGlow {
   position: absolute;
-  top: -60px;
-  left: 40px;
-  width: 240px;
-  height: 240px;
-  background: radial-gradient(circle, rgba(234, 179, 8, 0.15) 0%, transparent 70%);
-  filter: blur(35px);
+  top: -40px;
+  left: 20px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.12) 0%, rgba(99, 102, 241, 0.06) 50%, transparent 70%);
+  filter: blur(40px);
   pointer-events: none;
 }
 
-/* Emblem with assignment hero.png */
+/* Level Badge Emblem Focal Point */
 .emblemWrapper {
   position: relative;
-  width: 110px;
-  height: 110px;
+  width: 130px;
+  height: 130px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -34,41 +33,47 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.6));
-  animation: floatSubtle 4s ease-in-out infinite alternate;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.7));
+  animation: floatEmblem 4s ease-in-out infinite alternate;
 }
 
-@keyframes floatSubtle {
+@keyframes floatEmblem {
   0% {
     transform: translateY(0px);
   }
   100% {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
   }
 }
 
 .levelBadgeOverlay {
   position: absolute;
-  top: 48%;
+  top: 36%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: linear-gradient(135deg, #facc15 0%, #eab308 50%, #ca8a04 100%);
-  width: 50px;
-  height: 50px;
+  background: var(--gold-gradient);
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 2px solid #ffffff;
-  box-shadow: 0 4px 15px rgba(234, 179, 8, 0.5), inset 0 1px 3px rgba(255, 255, 255, 0.6);
-  color: #0f172a;
+  box-shadow: 0 6px 20px rgba(234, 179, 8, 0.6), inset 0 1px 3px rgba(255, 255, 255, 0.8);
+  color: #0c0e17;
+  z-index: 2;
+}
+
+.crownIcon {
+  color: #0c0e17;
+  margin-bottom: -2px;
 }
 
 .badgeLabel {
-  font-size: 0.55rem;
+  font-size: 0.52rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   line-height: 1;
 }
 
@@ -80,41 +85,41 @@
 
 .tierRingGlow {
   position: absolute;
-  inset: -6px;
+  inset: -8px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(234, 179, 8, 0.25), transparent 70%);
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.3), transparent 70%);
   pointer-events: none;
+  animation: pulseRing 3s ease-in-out infinite alternate;
 }
 
-/* Titles and tags */
+@keyframes pulseRing {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* Typography & Badges */
 .tierTitle {
-  font-size: 1.75rem;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text-primary);
   margin: 0;
-}
-
-.tierStatusTag {
-  background: rgba(234, 179, 8, 0.12);
-  border: 1px solid rgba(234, 179, 8, 0.3);
-  color: #fde047;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--radius-full);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
+  line-height: 1.2;
 }
 
 .boostPill {
-  background: rgba(14, 165, 233, 0.12);
-  border: 1px solid rgba(14, 165, 233, 0.3);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
   color: #38bdf8;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  padding: 0.25rem 0.65rem;
+  padding: 0.22rem 0.65rem;
   border-radius: var(--radius-full);
   display: inline-flex;
   align-items: center;
@@ -125,33 +130,35 @@
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  padding: 0.25rem 0.65rem;
+  padding: 0.22rem 0.65rem;
   border-radius: var(--radius-full);
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
 }
 
-.tierSubtitle {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.15rem;
-  line-height: 1.45;
+.streakPill {
+  background: rgba(234, 179, 8, 0.12);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  color: #fde047;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.22rem 0.65rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
-.tierSubtitle strong {
-  color: var(--text-primary);
-}
-
-/* Quick Glance Progress */
-.glanceProgress {
-  background: rgba(12, 14, 23, 0.5);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 0.85rem 1rem;
-  max-width: 580px;
+/* XP Progression Bar */
+.progressContainer {
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0;
+  margin-top: 0.5rem;
+  max-width: 620px;
 }
 
 .progressLabel {
@@ -159,24 +166,38 @@
   text-transform: uppercase;
   font-weight: 700;
   color: var(--text-muted);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
 .progressRatio {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 
 .progressRatio strong {
   color: var(--text-primary);
+  font-weight: 700;
+}
+
+.progressPctBadge {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-xs);
 }
 
 .progressTrack {
-  height: 8px;
+  height: 10px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-full);
   overflow: hidden;
-  margin: 0.4rem 0;
+  margin: 0.5rem 0 0.4rem;
+  position: relative;
 }
 
 .progressBar {
@@ -184,62 +205,114 @@
   background: linear-gradient(90deg, #eab308 0%, #38bdf8 100%);
   border-radius: var(--radius-full);
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+  position: relative;
 }
 
-.countdownText {
-  font-size: 0.72rem;
-  color: #38bdf8;
-  font-weight: 600;
+.shimmerTip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 14px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-full);
+  filter: blur(2px);
+  animation: tipPulse 1.8s ease-in-out infinite;
 }
 
-.streakIndicator {
-  font-size: 0.72rem;
+@keyframes tipPulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.nextMilestoneText {
+  font-size: 0.75rem;
   color: var(--text-secondary);
 }
 
-/* CTA button */
-.perksButton {
-  background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(99, 102, 241, 0.15));
+.nextMilestoneText strong {
+  color: #38bdf8;
+}
+
+.paceText {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Action Buttons */
+.primaryBtn {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(99, 102, 241, 0.2));
   border: 1px solid var(--border-gold);
   color: #fde047;
   font-weight: 700;
-  font-size: 0.88rem;
-  padding: 0.75rem 1.35rem;
+  font-size: 0.85rem;
+  padding: 0.7rem 1.25rem;
   border-radius: var(--radius-md);
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  justify-content: center;
+  gap: 0.5rem;
   cursor: pointer;
   transition: all var(--transition-normal);
   white-space: nowrap;
 }
 
-.perksButton:hover {
-  background: linear-gradient(135deg, rgba(234, 179, 8, 0.25), rgba(99, 102, 241, 0.25));
+.primaryBtn:hover {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.3), rgba(99, 102, 241, 0.3));
   border-color: #fde047;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(234, 179, 8, 0.2);
+  box-shadow: 0 6px 20px rgba(234, 179, 8, 0.25);
 }
 
 .btnArrow {
   transition: transform var(--transition-fast);
 }
 
-.perksButton:hover .btnArrow {
+.primaryBtn:hover .btnArrow {
   transform: translateX(3px);
 }
 
+.secondaryBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.secondaryBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-medium);
+  transform: translateY(-1px);
+}
+
 @media (max-width: 768px) {
-  .heroCard {
-    padding: 1.5rem 1.25rem;
+  .heroSection {
+    padding: 0.25rem 0;
   }
-  .tierTitle {
-    font-size: 1.45rem;
+  .progressContainer {
+    max-width: 100%;
   }
-  .perksButton {
-    width: 100%;
-    justify-content: center;
+  .primaryBtn,
+  .secondaryBtn {
+    flex: 1;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.82rem;
   }
 }

@@ -46,13 +46,15 @@ const LevelDashboard = () => {
 
       {/* Main Content Area */}
       <main className={styles.mainContent}>
-        <div className="container">
-          {/* Level Hero Section */}
+        <div className={styles.dashboardContainer}>
+          {/* Level Hero Section - Integrated into Page Background */}
           <section id="dashboard" className="mb-4">
             <LevelHero profile={profile} onOpenModal={openLevelUpModal} />
           </section>
 
-          {/* XP Progress & Next Milestone Reward Cards */}
+          <div className={styles.sectionDivider} />
+
+          {/* XP Progression Breakdown & Next Level Reward Spotlight */}
           <section className="row g-4 mb-4">
             <div className="col-12 col-lg-7 d-flex flex-column">
               <XPProgress profile={profile} />
@@ -62,12 +64,16 @@ const LevelDashboard = () => {
             </div>
           </section>
 
-          {/* Tier Roadmap Ladder */}
+          <div className={styles.sectionDivider} />
+
+          {/* Connected Level Roadmap */}
           <section id="roadmap" className="mb-4">
             <LevelRoadmap roadmap={roadmap} />
           </section>
 
-          {/* Play & Earn Games + Daily Quests */}
+          <div className={styles.sectionDivider} />
+
+          {/* Play & Earn Games + Quests & Bounties */}
           <section className="row g-4 mb-4">
             <div className="col-12 col-lg-7" id="play">
               <PlayAndEarn
@@ -86,7 +92,9 @@ const LevelDashboard = () => {
             </div>
           </section>
 
-          {/* Recent Activity Log */}
+          <div className={styles.sectionDivider} />
+
+          {/* Live XP Activity Feed */}
           <section id="activity" className="mb-4">
             <XPActivity activities={activities} />
           </section>
@@ -95,8 +103,8 @@ const LevelDashboard = () => {
           <footer className={styles.footerNote}>
             <div className="d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
               <span>VELOOP Rewards &bull; Level-Up Dashboard</span>
-              <span className="text-muted">
-                Demo Engagement &bull; No Real Financial Value
+              <span className={styles.footerSubtext}>
+                Demo Engagement Platform &bull; Tokens Hold No Real-World Currency Value
               </span>
             </div>
           </footer>
@@ -121,9 +129,9 @@ const LevelDashboard = () => {
         >
           <div className="d-flex align-items-center gap-2">
             {toast.type === 'info' ? (
-              <Info size={16} className="flex-shrink-0" />
+              <Info size={16} className="flex-shrink-0 text-info" />
             ) : (
-              <CheckCircle size={16} className="flex-shrink-0" />
+              <CheckCircle size={16} className="flex-shrink-0 text-success" />
             )}
             <span>{toast.message}</span>
           </div>

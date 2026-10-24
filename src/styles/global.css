@@ -2,42 +2,57 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
 :root {
-  /* Premium Dark Theme Foundations */
-  --bg-canvas: #0c0e17;
-  --bg-primary: #121524;
-  --bg-secondary: #1a1e33;
-  --bg-card: rgba(23, 27, 46, 0.75);
-  --bg-card-hover: rgba(30, 36, 60, 0.9);
-  --bg-glass: rgba(18, 21, 36, 0.65);
+  /* Premium Dark Theme Foundations (Centered around #161827) */
+  --bg-canvas: #161827;
+  --bg-primary: #1c1f32;
+  --bg-secondary: #232842;
+  --bg-card: rgba(26, 30, 50, 0.72);
+  --bg-card-hover: rgba(33, 38, 64, 0.88);
+  --bg-glass: rgba(22, 24, 39, 0.78);
+  --bg-surface-elevated: #20243b;
 
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-medium: rgba(255, 255, 255, 0.14);
-  --border-gold: rgba(234, 179, 8, 0.35);
-  --border-cyan: rgba(14, 165, 233, 0.35);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --border-gold: rgba(234, 179, 8, 0.4);
+  --border-cyan: rgba(56, 189, 248, 0.35);
   --border-indigo: rgba(99, 102, 241, 0.35);
 
-  /* Tier & Accent Colors (Restrained, prestigious palette) */
+  /* Tier & Accent Colors (Prestigious, curated palette) */
+  --tier-bronze: #cd7f32;
+  --tier-bronze-glow: rgba(205, 127, 50, 0.22);
+
+  --tier-silver: #cbd5e1;
+  --tier-silver-glow: rgba(203, 213, 225, 0.18);
+
   --gold-primary: #eab308;
   --gold-light: #fef08a;
-  --gold-glow: rgba(234, 179, 8, 0.22);
+  --gold-glow: rgba(234, 179, 8, 0.28);
+  --gold-gradient: linear-gradient(135deg, #facc15 0%, #eab308 50%, #ca8a04 100%);
+  --tier-gold: #eab308;
+  --tier-gold-glow: rgba(234, 179, 8, 0.28);
 
   --silver-primary: #cbd5e1;
   --silver-glow: rgba(203, 213, 225, 0.18);
 
   --cyan-primary: #38bdf8;
-  --cyan-glow: rgba(56, 189, 248, 0.22);
+  --cyan-glow: rgba(56, 189, 248, 0.25);
+  --tier-platinum: #38bdf8;
+  --tier-platinum-glow: rgba(56, 189, 248, 0.25);
 
   --indigo-primary: #6366f1;
   --indigo-glow: rgba(99, 102, 241, 0.25);
+  --tier-diamond: #a855f7;
+  --tier-diamond-glow: rgba(168, 85, 247, 0.25);
 
   --emerald-primary: #10b981;
-  --emerald-glow: rgba(16, 185, 129, 0.2);
+  --emerald-glow: rgba(16, 185, 129, 0.22);
 
-  /* Clean Typography Colors */
+  /* High Contrast Typography Colors for Dark Theme */
   --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-dim: #475569;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
 
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
@@ -48,10 +63,11 @@
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
-  --shadow-gold: 0 0 24px rgba(234, 179, 8, 0.18);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+  --shadow-gold: 0 0 24px rgba(234, 179, 8, 0.2);
+  --shadow-cyan: 0 0 24px rgba(56, 189, 248, 0.2);
   --shadow-indigo: 0 0 24px rgba(99, 102, 241, 0.2);
 
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -67,6 +83,7 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
@@ -74,8 +91,10 @@ body {
   padding: 0;
   background-color: var(--bg-canvas) !important;
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.12), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 90% 60%, rgba(14, 165, 233, 0.06), transparent 60%);
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(99, 102, 241, 0.10), transparent 70%),
+    radial-gradient(ellipse 65% 45% at 90% 35%, rgba(56, 189, 248, 0.06), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 10% 75%, rgba(234, 179, 8, 0.04), transparent 65%);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-sans);
   min-height: 100vh;
@@ -91,21 +110,21 @@ body {
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(12, 14, 23, 0.8);
+  background: rgba(22, 24, 39, 0.85);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.2);
-  border-radius: 9999px;
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.35);
+  background: rgba(148, 163, 184, 0.45);
 }
 
 button {
@@ -114,6 +133,13 @@ button {
   outline: none;
   cursor: pointer;
   background: none;
+  touch-action: manipulation;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--cyan-primary);
+  outline-offset: 2px;
 }
 
 a {
@@ -121,23 +147,69 @@ a {
   color: inherit;
 }
 
-/* Animations */
-@keyframes pulseSubtle {
+/* Section Header Styles - Consistent across open sections */
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.25rem;
+}
+
+.sectionHeadingIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: rgba(99, 102, 241, 0.12);
+  color: #a5b4fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sectionTitleText {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.sectionSubtitleText {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Micro-animations */
+@keyframes pulseGlow {
   0%, 100% {
     opacity: 1;
     transform: scale(1);
   }
   50% {
-    opacity: 0.88;
+    opacity: 0.85;
     transform: scale(1.02);
   }
 }
 
-@keyframes shimmer {
+@keyframes shimmerEffect {
   0% {
     background-position: -200% 0;
   }
   100% {
     background-position: 200% 0;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

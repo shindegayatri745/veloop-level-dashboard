@@ -1,51 +1,45 @@
-.sectionCard {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  height: 100%;
+.questsSection {
+  background: transparent;
 }
 
 .iconCircle {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-sm);
-  background: rgba(14, 165, 233, 0.12);
-  color: #38bdf8;
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.sectionTitle {
-  font-size: 0.95rem;
+.headingTitle {
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
   line-height: 1.2;
 }
 
-.sectionSubtitle {
-  font-size: 0.72rem;
+.headingSubtitle {
+  font-size: 0.78rem;
   color: var(--text-muted);
-  font-weight: 600;
 }
 
 .summaryBadge {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
   font-size: 0.72rem;
-  font-weight: 700;
-  color: #38bdf8;
-  background: rgba(14, 165, 233, 0.12);
-  border: 1px solid rgba(14, 165, 233, 0.25);
+  font-weight: 600;
   padding: 0.2rem 0.55rem;
   border-radius: var(--radius-full);
 }
 
-/* Task Item Card */
+/* Individual Task Card */
 .taskCard {
-  background: rgba(12, 14, 23, 0.55);
+  background: rgba(26, 30, 50, 0.7);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 0.85rem 1rem;
@@ -54,63 +48,57 @@
 
 .taskCard:hover {
   border-color: var(--border-medium);
-  background: rgba(12, 14, 23, 0.75);
+  background: rgba(32, 38, 62, 0.8);
+  transform: translateY(-1px);
 }
 
 .taskCompleted {
   opacity: 0.75;
-  border-color: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.25);
 }
 
 .taskReady {
-  border-color: rgba(234, 179, 8, 0.4);
-  background: rgba(234, 179, 8, 0.04);
+  border-color: rgba(234, 179, 8, 0.45);
+  box-shadow: 0 0 16px rgba(234, 179, 8, 0.15);
 }
 
 .categoryBadge {
   font-size: 0.65rem;
   font-weight: 700;
-  color: #a5b4fc;
-  background: rgba(99, 102, 241, 0.15);
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
   padding: 0.15rem 0.45rem;
   border-radius: var(--radius-xs);
-  text-transform: uppercase;
+  flex-shrink: 0;
 }
 
 .taskTitle {
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-primary);
-}
-
-.taskGoalText {
-  display: block;
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 .xpRewardTag {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 800;
   color: #38bdf8;
-  background: rgba(14, 165, 233, 0.12);
-  border: 1px solid rgba(14, 165, 233, 0.25);
-  padding: 0.15rem 0.45rem;
-  border-radius: var(--radius-xs);
-  white-space: nowrap;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
 }
 
 .progressCounter {
   font-size: 0.68rem;
   color: var(--text-muted);
-  font-weight: 600;
 }
 
 .pctText {
   font-size: 0.68rem;
-  color: var(--text-muted);
   font-weight: 700;
+  color: var(--text-secondary);
 }
 
 .progressTrack {
@@ -122,58 +110,16 @@
 
 .progressBar {
   height: 100%;
-  background: linear-gradient(90deg, #6366f1, #0ea5e9);
+  background: linear-gradient(90deg, #38bdf8, #6366f1);
   border-radius: var(--radius-full);
-  transition: width 0.3s ease;
+  transition: width 0.4s ease;
 }
 
 .progressBarDone {
-  background: #10b981;
+  background: linear-gradient(90deg, #10b981, #059669);
 }
 
-/* Action Buttons */
-.advanceBtn {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-primary);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.35rem 0.65rem;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  white-space: nowrap;
-}
-
-.advanceBtn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: var(--border-medium);
-}
-
-.claimBtn {
-  background: linear-gradient(135deg, #eab308, #ca8a04);
-  color: #0c0e17;
-  font-size: 0.72rem;
-  font-weight: 800;
-  padding: 0.35rem 0.75rem;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  cursor: pointer;
-  box-shadow: 0 0 12px rgba(234, 179, 8, 0.4);
-  transition: all var(--transition-fast);
-  white-space: nowrap;
-}
-
-.claimBtn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 18px rgba(234, 179, 8, 0.6);
-}
-
+/* Action Buttons & States */
 .claimedPill {
   display: inline-flex;
   align-items: center;
@@ -181,8 +127,59 @@
   font-size: 0.72rem;
   font-weight: 700;
   color: #34d399;
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(16, 185, 129, 0.12);
   border: 1px solid rgba(16, 185, 129, 0.25);
-  padding: 0.3rem 0.65rem;
+  padding: 0.35rem 0.75rem;
   border-radius: var(--radius-sm);
+}
+
+.claimBtn {
+  background: linear-gradient(135deg, #facc15, #ca8a04);
+  color: #0c0e17;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(234, 179, 8, 0.4);
+  animation: pulseGlow 1.8s infinite alternate;
+  transition: all var(--transition-fast);
+}
+
+.claimBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(234, 179, 8, 0.6);
+}
+
+.advanceBtn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.advanceBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--border-medium);
+  color: #ffffff;
+}
+
+@media (max-width: 480px) {
+  .taskCard {
+    padding: 0.75rem 0.7rem;
+  }
+  .taskTitle {
+    font-size: 0.8rem;
+  }
 }

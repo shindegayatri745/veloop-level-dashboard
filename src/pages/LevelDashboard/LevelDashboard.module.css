@@ -8,15 +8,34 @@
 
 .mainContent {
   flex: 1;
-  padding: 1.75rem 0 3rem;
+  padding: 1.5rem 0 3rem;
+}
+
+.dashboardContainer {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Subtle separator between open sections instead of card nesting */
+.sectionDivider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.07) 50%, transparent 100%);
+  margin: 2rem 0;
 }
 
 .footerNote {
   color: var(--text-muted);
-  font-size: 0.75rem;
-  padding: 1.5rem 0;
+  font-size: 0.78rem;
+  padding: 1.5rem 0 0.5rem;
   border-top: 1px solid var(--border-subtle);
   margin-top: 2.5rem;
+}
+
+.footerSubtext {
+  color: var(--text-dim);
+  font-size: 0.72rem;
 }
 
 /* Floating Toast Notification */
@@ -47,17 +66,26 @@
 }
 
 .toastSuccess {
-  background: #0f172a;
+  background: #1c2035;
   color: #f8fafc;
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  border: 1px solid rgba(16, 185, 129, 0.45);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(16, 185, 129, 0.2);
 }
 
 .toastInfo {
-  background: #0f172a;
+  background: #1c2035;
   color: #f8fafc;
-  border: 1px solid rgba(14, 165, 233, 0.4);
+  border: 1px solid rgba(14, 165, 233, 0.45);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(14, 165, 233, 0.2);
+}
+
+@media (max-width: 768px) {
+  .dashboardContainer {
+    padding: 0 1rem;
+  }
+  .sectionDivider {
+    margin: 1.5rem 0;
+  }
 }
 
 @media (max-width: 576px) {
