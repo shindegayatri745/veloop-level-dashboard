@@ -61,12 +61,9 @@ const EarnMoreXP = ({ tasks, onCompleteTask, onProgressTask, onClaimTaskReward }
                   : ''
               }`}
             >
-              {/* Task Header: Title, Category & XP Tag */}
-              <div className="d-flex align-items-start justify-content-between gap-2 mb-2">
-                <div className="d-flex align-items-center gap-1 gap-sm-2 flex-wrap">
-                  <span className={styles.categoryBadge}>{task.category}</span>
-                  <span className={styles.taskTitle}>{task.title}</span>
-                </div>
+              {/* Task Header: Title & XP Tag */}
+              <div className="d-flex align-items-center justify-content-between gap-2 mb-2">
+                <span className={styles.taskTitle}>{task.title}</span>
                 <span className={styles.xpRewardTag}>+{task.rewardXP} XP</span>
               </div>
 
@@ -75,7 +72,7 @@ const EarnMoreXP = ({ tasks, onCompleteTask, onProgressTask, onClaimTaskReward }
                 <div className="flex-grow-1">
                   <div className="d-flex justify-content-between fs-7 mb-1">
                     <span className={styles.progressCounter}>
-                      Step {task.progress}/{task.totalRequired}
+                      {task.progress}/{task.totalRequired} steps
                     </span>
                     <span className={styles.pctText}>{pct}%</span>
                   </div>
@@ -109,10 +106,10 @@ const EarnMoreXP = ({ tasks, onCompleteTask, onProgressTask, onClaimTaskReward }
                     <button
                       className={styles.advanceBtn}
                       onClick={() => handleAction(task)}
-                      title={`Complete step for ${task.title}`}
+                      title={`Advance step for ${task.title}`}
                     >
                       <Plus size={13} />
-                      <span>Step ({task.progress}/{task.totalRequired})</span>
+                      <span>+1 Step</span>
                     </button>
                   )}
                 </div>

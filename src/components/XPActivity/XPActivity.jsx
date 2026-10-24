@@ -81,10 +81,7 @@ const XPActivity = ({ activities }) => {
 
                 <div>
                   <div className={styles.title}>{act.title}</div>
-                  <div className={styles.meta}>
-                    <span>{act.timestamp}</span> &bull;{' '}
-                    <span className={styles.categoryTag}>{act.category}</span>
-                  </div>
+                  <span className={styles.meta}>{act.timestamp}</span>
                 </div>
               </div>
 

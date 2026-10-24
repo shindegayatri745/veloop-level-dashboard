@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   Gamepad2,
-  Star,
-  Clock,
   Play,
   RotateCcw,
   Sparkles,
@@ -142,22 +140,9 @@ const PlayAndEarn = ({ games, onPlayGame, awardGameXP }) => {
                   </div>
                 </div>
 
-                {/* Card Content */}
+                {/* Card Content: Title & Action */}
                 <div className={styles.cardBody}>
-                  <div>
-                    <h3 className={styles.gameTitle}>{game.title}</h3>
-                    <div className={styles.categoryPill}>{game.category}</div>
-
-                    <div className={styles.metaRow}>
-                      <span className={styles.metaItem}>
-                        <Clock size={11} /> {game.playTime}
-                      </span>
-                      <span className={`${styles.metaItem} text-warning`}>
-                        <Star size={11} fill="#eab308" /> {game.rating}
-                      </span>
-                    </div>
-                  </div>
-
+                  <h3 className={styles.gameTitle}>{game.title}</h3>
                   <button
                     className={styles.playBtn}
                     onClick={() => handleOpenGame(game)}

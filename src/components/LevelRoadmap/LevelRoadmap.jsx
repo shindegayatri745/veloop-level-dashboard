@@ -144,10 +144,6 @@ const LevelRoadmap = ({ roadmap }) => {
                     {isCurrent && <span className={styles.currentBadge}>Current</span>}
                   </div>
 
-                  <span className={styles.xpRange}>
-                    {tier.minXP.toLocaleString()} – {tier.maxXP.toLocaleString()} XP
-                  </span>
-
                   {tier.rewardBadge && (
                     <div className={styles.rewardBadgeChip}>
                       <TierIconComponent size={11} className="flex-shrink-0" />

@@ -27,10 +27,10 @@
 
 .footerNote {
   color: var(--text-muted);
-  font-size: 0.78rem;
-  padding: 1.5rem 0 0.5rem;
+  font-size: 0.75rem;
+  padding: 1rem 0 0.5rem;
   border-top: 1px solid var(--border-subtle);
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
 }
 
 .footerSubtext {

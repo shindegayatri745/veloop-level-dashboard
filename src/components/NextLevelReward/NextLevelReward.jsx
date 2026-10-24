@@ -1,100 +1,75 @@
 import React, { useState } from 'react';
-import { Gift, Zap, Coins, Award, Lock, Info, Sparkles } from 'lucide-react';
+import { Gift, Zap, Coins, Award, ChevronDown, ChevronUp } from 'lucide-react';
 import styles from './NextLevelReward.module.css';
 
 const NextLevelReward = ({ reward }) => {
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <div className={styles.rewardCard}>
-      {/* Ambient Spotlight Glow */}
-      <div className={styles.ambientGlow} />
-
-      {/* Top Milestone Badge */}
+    <div className={styles.rewardContainer}>
+      {/* Top Header */}
       <div className="d-flex align-items-center justify-content-between mb-2">
-        <span className={styles.milestoneBadge}>
-          <Gift size={13} />
-          Level {reward?.level || 5} Reward Spotlight
+        <div className="d-flex align-items-center gap-2">
+          <div className={styles.rewardEmblem}>
+            <Gift size={15} />
+          </div>
+          <div>
+            <h2 className={styles.rewardTitle}>Next Reward Target</h2>
+            <span className={styles.rewardSubtitle}>
+              {reward?.title || 'Level 5 Platinum Master'}
+            </span>
+          </div>
+        </div>
+
+        <span className={styles.reqXPText}>
+          <strong>1,550 XP</strong> remaining
         </span>
-        <span className={styles.timePill}>~{reward?.estimatedDaysLeft || 4}d away</span>
       </div>
 
-      {/* Reward Main Visual & Title */}
-      <div className="d-flex align-items-center gap-3 mb-3">
-        <div className={styles.rewardEmblem}>
-          <Sparkles size={24} className={styles.sparkleIcon} />
-        </div>
-        <div>
-          <h3 className={styles.rewardTitle}>{reward?.title || 'Platinum Master Tier'}</h3>
-          <span className={styles.rewardSubtitle}>
-            Unlocks automatically at 5,000 XP
-          </span>
-        </div>
-      </div>
-
-      {/* Visual Perks Matrix */}
-      <div className={styles.perksGrid}>
-        <div className={styles.perkChip}>
-          <div className={styles.chipIconBox}>
-            <Zap size={14} className="text-info" />
-          </div>
-          <div>
-            <span className={styles.chipLabel}>Boost</span>
-            <span className={styles.chipValue}>{reward?.multiplier || '2.5x'}</span>
-          </div>
+      {/* Main Unlock Banner Info */}
+      <div className={styles.unlockBanner}>
+        <div className="d-flex align-items-center justify-content-between mb-2">
+          <span className={styles.unlockNotice}>Unlocks automatically at 5,000 XP</span>
+          <span className={styles.timeNotice}>~{reward?.estimatedDaysLeft || 4}d at current pace</span>
         </div>
 
-        <div className={styles.perkChip}>
-          <div className={styles.chipIconBox}>
-            <Coins size={14} className="text-warning" />
+        {/* Compact Perk Chips Preview (No nested card boxes) */}
+        <div className="d-flex flex-wrap gap-2">
+          <div className={styles.perkPill}>
+            <Zap size={13} className="text-info" />
+            <span>{reward?.multiplier || '2.5x'} Boost</span>
           </div>
-          <div>
-            <span className={styles.chipLabel}>Bonus</span>
-            <span className={styles.chipValue}>+{reward?.coinBonus?.toLocaleString() || '2,500'} Coins</span>
+          <div className={styles.perkPill}>
+            <Coins size={13} className="text-warning" />
+            <span>+{reward?.coinBonus?.toLocaleString() || '2,500'} Coins</span>
           </div>
-        </div>
-
-        <div className={styles.perkChipFull}>
-          <div className={styles.chipIconBox}>
-            <Award size={14} className="text-primary" />
-          </div>
-          <div>
-            <span className={styles.chipLabel}>Milestone Emblem</span>
-            <span className={styles.chipValue}>{reward?.exclusiveBadge || 'Platinum Dragoncrest'}</span>
+          <div className={styles.perkPill}>
+            <Award size={13} className="text-primary" />
+            <span>{reward?.exclusiveBadge || 'Platinum Crest'}</span>
           </div>
         </div>
       </div>
 
-      {/* Footer Unlock Progress & Tooltip Disclaimer */}
-      <div className={styles.cardFooter}>
-        <div className="d-flex align-items-center gap-1">
-          <Lock size={12} className="text-muted" />
-          <span className={styles.unlockText}>1,550 XP Remaining</span>
-        </div>
-
-        {/* Info Tooltip Popover */}
-        <div
-          className="position-relative"
-          onMouseEnter={() => setShowTooltip(true)}
-          onMouseLeave={() => setShowTooltip(false)}
+      {/* Optional Details Expandable */}
+      <div className="d-flex justify-content-end mt-2">
+        <button
+          className={styles.detailsBtn}
+          onClick={() => setShowDetails((prev) => !prev)}
+          aria-expanded={showDetails}
+          title="Toggle perk tier terms"
         >
-          <button
-            type="button"
-            className={styles.infoBtn}
-            onClick={() => setShowTooltip((prev) => !prev)}
-            aria-label="Reward information and disclaimer"
-          >
-            <Info size={13} />
-            <span className="d-none d-sm-inline">Info</span>
-          </button>
-
-          {showTooltip && (
-            <div className={styles.tooltipPopover} role="tooltip">
-              <span>Demo engagement rewards. Auto-credited upon reaching Level 5. No fiat or monetary value.</span>
-            </div>
-          )}
-        </div>
+          <span>{showDetails ? 'Hide details' : 'Perk details'}</span>
+          {showDetails ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+        </button>
       </div>
+
+      {showDetails && (
+        <div className={styles.expandableNote}>
+          <p className="mb-0">
+            Upon reaching Level 5, your 2.5x earning multiplier applies to all arcade games, daily bounties, and streak bonuses. Engagement demo tokens hold no cash value.
+          </p>
+        </div>
+      )}
     </div>
   );
 };

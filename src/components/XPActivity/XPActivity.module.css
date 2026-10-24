@@ -138,10 +138,7 @@
   color: var(--text-muted);
 }
 
-.categoryTag {
-  color: var(--text-secondary);
-  font-weight: 600;
-}
+
 
 .xpBadge {
   font-size: 0.78rem;

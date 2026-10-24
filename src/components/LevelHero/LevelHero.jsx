@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Trophy, Zap, ArrowRight, Flame, Gamepad2, Crown } from 'lucide-react';
+import { Sparkles, ArrowRight, Gamepad2, Crown } from 'lucide-react';
 import heroBadge from '../../assets/hero.png';
 import styles from './LevelHero.module.css';
 
@@ -34,37 +34,23 @@ const LevelHero = ({ profile, onOpenModal }) => {
 
         {/* Level Info & Glancable Progress */}
         <div className="col-12 col-md text-center text-md-start">
-          {/* Header Row: Title & Key Badges */}
+          {/* Header Row: Title & Subtle Meta */}
           <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
             <h1 className={styles.tierTitle}>
               Level {profile?.currentLevel || 4}: {profile?.currentLevelName || 'Gold Elite'}
             </h1>
-            <span className={styles.boostPill} title="Active earning boost multiplier">
-              <Zap size={13} />
-              <span>2.0x Boost</span>
+            <span className={styles.subtleMeta}>
+              2.0x Boost &bull; #{profile?.rank?.replace('#', '') || '142'} Rank &bull; {profile?.streakDays || 5}d Streak
             </span>
-            {profile?.rank && (
-              <span className={styles.rankPill} title="Current global rank">
-                <Trophy size={13} className="text-warning" />
-                <span>{profile.rank}</span>
-              </span>
-            )}
-            {profile?.streakDays && (
-              <span className={styles.streakPill} title="Daily login streak">
-                <Flame size={13} className="text-warning" />
-                <span>{profile.streakDays}d Streak</span>
-              </span>
-            )}
           </div>
 
           {/* Prominent XP Progression Bar */}
           <div className={styles.progressContainer}>
             <div className="d-flex justify-content-between align-items-center mb-1">
-              <span className={styles.progressLabel}>Tier Progress</span>
               <span className={styles.progressRatio}>
                 <strong>{currentXP.toLocaleString()}</strong> / {maxXP.toLocaleString()} XP
-                <span className={styles.progressPctBadge}>{progressPercent}%</span>
               </span>
+              <span className={styles.progressPctBadge}>{progressPercent}%</span>
             </div>
 
             <div className={styles.progressTrack} role="progressbar" aria-valuenow={progressPercent} aria-valuemin="0" aria-valuemax="100">
@@ -78,9 +64,8 @@ const LevelHero = ({ profile, onOpenModal }) => {
 
             <div className="d-flex justify-content-between align-items-center mt-1">
               <span className={styles.nextMilestoneText}>
-                <strong>{xpNeeded.toLocaleString()} XP</strong> to Level {profile?.nextLevel || 5} ({profile?.nextLevelName || 'Platinum Master'})
+                <strong>{xpNeeded.toLocaleString()} XP</strong> to Level {profile?.nextLevel || 5} {profile?.nextLevelName || 'Platinum Master'}
               </span>
-              <span className={styles.paceText}>Active Tier 4</span>
             </div>
           </div>
         </div>

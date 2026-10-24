@@ -99,13 +99,11 @@ const LevelDashboard = () => {
             <XPActivity activities={activities} />
           </section>
 
-          {/* Clean Ecosystem Footer */}
+          {/* Minimal Footer */}
           <footer className={styles.footerNote}>
-            <div className="d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
-              <span>VELOOP Rewards &bull; Level-Up Dashboard</span>
-              <span className={styles.footerSubtext}>
-                Demo Engagement Platform &bull; Tokens Hold No Real-World Currency Value
-              </span>
+            <div className="d-flex flex-column flex-sm-row align-items-center justify-content-between gap-1 text-center text-sm-start">
+              <span>VELOOP Rewards</span>
+              <span className={styles.footerSubtext}>Demo engagement platform &bull; No cash value</span>
             </div>
           </footer>
         </div>
